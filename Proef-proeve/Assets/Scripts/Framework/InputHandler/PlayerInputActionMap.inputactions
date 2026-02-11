@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "PlayerInputActionMap",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "648975fe-0371-44c1-a7fe-aae6b9e901ce",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "8df1c594-689d-48c6-a59a-b0112ff05c9e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "46ed92e6-371f-4cc3-b870-e69729900339",
+                    "path": "<AndroidJoystick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
