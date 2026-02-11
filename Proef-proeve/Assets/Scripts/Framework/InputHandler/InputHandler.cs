@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class InputHandler : MonoBehaviour
+{
+    public static InputHandler Instance;
+    public EventHandler<IntentSO> OnMoveInput;
+
+    [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private InputToIntent[] inputToIntents;
+
+    private Dictionary<Guid, IntentSO> _idToIntent;
+
+    private void Awake()
+    {
+        if (Instance != null) Destroy(gameObject);
+        Instance = this;
+
+        PopulateDictionary();
+    }
+
+    private void OnEnable()
+    {
+        playerInput.actions["Move"].performed += OnMoveInputDetected;
+    }
+
+    private void OnDisable()
+    {
+        playerInput.actions["Move"].performed -= OnMoveInputDetected;      
+    }
+
+    private void OnMoveInputDetected(InputAction.CallbackContext context) => OnMoveInput?.Invoke(this, GetIntentWithInput(context));
+
+    private void PopulateDictionary()
+    {
+        _idToIntent = new Dictionary<Guid, IntentSO>();
+
+        foreach (var inputToIntent in inputToIntents)
+        {
+            var reference = inputToIntent.inputActionReference;
+            if (reference == null && reference.action == null) continue;
+
+            _idToIntent[reference.action.id] = inputToIntent.intentSO;
+        }
+    }
+
+    private IntentSO GetIntentWithInput(InputAction.CallbackContext context)
+    {
+        var action = context.action;
+        if (action == null) return null;
+        _idToIntent.TryGetValue(action.id, out var stateIntent);
+        return stateIntent;
+    }
+}
