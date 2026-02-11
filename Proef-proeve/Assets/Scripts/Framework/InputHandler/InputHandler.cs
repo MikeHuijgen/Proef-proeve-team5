@@ -53,4 +53,6 @@ public class InputHandler : MonoBehaviour
         _idToIntent.TryGetValue(action.id, out var stateIntent);
         return stateIntent;
     }
+
+    public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
 }
