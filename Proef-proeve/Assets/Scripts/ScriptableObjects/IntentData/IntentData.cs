@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "IntentSO", menuName = "Scriptable Objects/IntentSO")]
-public class IntentSO : ScriptableObject
+[CreateAssetMenu(fileName = "IntentData", menuName = "Scriptable Objects/IntentData")]
+public class IntentData : ScriptableObject
 {
     
 }

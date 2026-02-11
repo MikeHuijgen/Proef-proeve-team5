@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
-    public EventHandler<IntentSO> OnMoveInput;
+    public EventHandler<IntentData> OnMoveInput;
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
 
-    private Dictionary<Guid, IntentSO> _idToIntent;
+    private Dictionary<Guid, IntentData> _idToIntent;
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class InputHandler : MonoBehaviour
 
     private void PopulateDictionary()
     {
-        _idToIntent = new Dictionary<Guid, IntentSO>();
+        _idToIntent = new Dictionary<Guid, IntentData>();
 
         foreach (var inputToIntent in inputToIntents)
         {
@@ -46,7 +46,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private IntentSO GetIntentWithInput(InputAction.CallbackContext context)
+    private IntentData GetIntentWithInput(InputAction.CallbackContext context)
     {
         var action = context.action;
         if (action == null) return null;
