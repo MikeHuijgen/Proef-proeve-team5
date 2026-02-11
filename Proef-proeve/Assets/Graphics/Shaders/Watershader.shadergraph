@@ -28,9 +28,6 @@
             "m_Id": "5c006ac188e84dd5a475c02f424e53f2"
         },
         {
-            "m_Id": "ead46498e6114fb2a2eee400e664956c"
-        },
-        {
             "m_Id": "188eef4263ef4060a23bda935f178ab8"
         },
         {
@@ -125,9 +122,6 @@
         },
         {
             "m_Id": "1ac302d2d55e4f59bca8443d8e1c6929"
-        },
-        {
-            "m_Id": "7c55ce971fe5487eb53ee09262f2aaeb"
         },
         {
             "m_Id": "91ac42e0eef7485489efe8cfe5f14934"
@@ -503,20 +497,6 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "704e31c20e2a439aae310b1b9de2c49a"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "7c55ce971fe5487eb53ee09262f2aaeb"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "45d4e5d0612b446281f38b59131f3f43"
                 },
                 "m_SlotId": 0
             }
@@ -1413,9 +1393,6 @@
             "m_Id": "a1644271931140899bf5840a7c37c950"
         },
         {
-            "m_Id": "ead46498e6114fb2a2eee400e664956c"
-        },
-        {
             "m_Id": "188eef4263ef4060a23bda935f178ab8"
         },
         {
@@ -1452,7 +1429,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 1.0,
+    "m_Value": 0.20000000298023225,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -1493,8 +1470,8 @@
     "m_ObjectId": "1950e31d579440269018da632b7cbed8",
     "m_Title": "Foam",
     "m_Position": {
-        "x": -3076.799560546875,
-        "y": 685.5999755859375
+        "x": -3076.7998046875,
+        "y": 685.6000366210938
     }
 }
 
@@ -1751,10 +1728,10 @@
     "m_PerRendererData": false,
     "m_customAttributes": [],
     "m_Value": {
-        "r": 0.601758599281311,
-        "g": 0.8415094017982483,
-        "b": 0.696723461151123,
-        "a": 1.0
+        "r": 0.10196078568696976,
+        "g": 0.3803921639919281,
+        "b": 0.21568627655506135,
+        "a": 0.09803921729326248
     },
     "isMainColor": false,
     "m_ColorMode": 1
@@ -1780,22 +1757,6 @@
     },
     "m_Labels": [],
     "m_Channel": 0
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "297d9a7233e947d59a4c88f0ee4f9b8d",
-    "m_Id": 0,
-    "m_DisplayName": "Wateralpha",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": [],
-    "m_LiteralMode": false
 }
 
 {
@@ -2196,7 +2157,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 100.0,
+    "m_Value": 175.0,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -2417,7 +2378,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Alpha",
     "m_StageCapability": 2,
-    "m_Value": 0.33000001311302187,
+    "m_Value": 1.0,
     "m_DefaultValue": 1.0,
     "m_Labels": [],
     "m_LiteralMode": false
@@ -3249,42 +3210,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "7c55ce971fe5487eb53ee09262f2aaeb",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -64.0,
-            "y": 445.5999755859375,
-            "width": 133.59994506835938,
-            "height": 33.60003662109375
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "297d9a7233e947d59a4c88f0ee4f9b8d"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "ead46498e6114fb2a2eee400e664956c"
-    }
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "850ecb9e5d1a43d09e673be80afc76c8",
     "m_Id": 1,
@@ -3726,7 +3651,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 58.900001525878909,
+    "m_Value": 60.0,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -3984,7 +3909,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 1.8899999856948853,
+    "m_Value": 3.0,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -4059,8 +3984,8 @@
     "m_ObjectId": "c06c461b9bc14f23b9418b007a248f46",
     "m_Title": "Watercolor",
     "m_Position": {
-        "x": -2905.599853515625,
-        "y": 60.79978561401367
+        "x": -2905.60009765625,
+        "y": 60.79998779296875
     }
 }
 
@@ -4463,7 +4388,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 100.0,
+    "m_Value": 150.0,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -4919,7 +4844,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 0.3400000035762787,
+    "m_Value": 0.30000001192092898,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -4945,52 +4870,8 @@
     "m_Title": "Refrection",
     "m_Position": {
         "x": -3169.599853515625,
-        "y": -927.9999389648438
+        "y": -928.0
     }
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "ead46498e6114fb2a2eee400e664956c",
-    "m_Guid": {
-        "m_GuidSerialized": "1e015e7c-0193-4f9b-90a3-763dd6367335"
-    },
-    "promotedFromAssetID": "",
-    "promotedFromCategoryName": "",
-    "promotedOrdering": -1,
-    "m_Name": "Wateralpha",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Wateralpha",
-    "m_DefaultReferenceName": "_Wateralpha",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_PerRendererData": false,
-    "m_customAttributes": [],
-    "m_Value": 1.0,
-    "m_FloatType": 0,
-    "m_LiteralFloatMode": false,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    },
-    "m_SliderType": 0,
-    "m_SliderPower": 3.0,
-    "m_EnumType": 0,
-    "m_CSharpEnumString": "",
-    "m_EnumNames": [
-        "Default"
-    ],
-    "m_EnumValues": [
-        0
-    ]
 }
 
 {
@@ -5070,7 +4951,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 0.8999999761581421,
+    "m_Value": 0.699999988079071,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -5205,7 +5086,7 @@
         "r": 0.06817371398210526,
         "g": 0.09433960914611817,
         "b": 0.08485627174377442,
-        "a": 1.0
+        "a": 0.19607843458652497
     },
     "isMainColor": false,
     "m_ColorMode": 1
