@@ -426,6 +426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72591c55e41bc434697245f0e08ae960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestState
+  canBeInterrupted: 1
+  timerDuration: 2
 --- !u!114 &1612975520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6304520fd135a7e4aa266a288e06db95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
+  canBeInterrupted: 1
 --- !u!114 &1612975521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,8 +454,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
   intentDataToStates:
-  - {fileID: 0}
+  - stateIntentData: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
+    state: {fileID: 1612975519}
   defaultState: {fileID: 1612975520}
+  _currentActiveState: {fileID: 0}
 --- !u!4 &1612975522
 Transform:
   m_ObjectHideFlags: 0

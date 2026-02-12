@@ -24,17 +24,17 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.actions["Move"].performed += OnMoveInputDetected;
+        playerInput.actions["Move"].performed += OnIntentInputDetected;
     }
 
     private void OnDisable()
     {
-        playerInput.actions["Move"].performed -= OnMoveInputDetected;      
+        playerInput.actions["Move"].performed -= OnIntentInputDetected;      
     }
 
-    private void OnMoveInputDetected(InputAction.CallbackContext context)
+    private void OnIntentInputDetected(InputAction.CallbackContext context)
     {
-        var stateIntentData = GetIntentDataByInput(context);
+        var stateIntentData = GetIntentDataByInputId(context);
         if(stateIntentData == null) return;
         OnNewStateIntent?.Invoke(this, stateIntentData);
     }
@@ -52,7 +52,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private StateIntentData GetIntentDataByInput(InputAction.CallbackContext context)
+    private StateIntentData GetIntentDataByInputId(InputAction.CallbackContext context)
     {
         var action = context.action;
         if (action == null) return null;
