@@ -24,11 +24,13 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        playerInput.actions["Jump"].performed += OnIntentInputDetected;
         playerInput.actions["Move"].performed += OnIntentInputDetected;
     }
 
     private void OnDisable()
     {
+        playerInput.actions["Jump"].performed -= OnIntentInputDetected;
         playerInput.actions["Move"].performed -= OnIntentInputDetected;      
     }
 

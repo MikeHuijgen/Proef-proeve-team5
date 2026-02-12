@@ -25,6 +25,7 @@ public class StateMachine : MonoBehaviour
     {
         var state = GetStateByIntentData(intentData);
         if (state == null || state == _currentActiveState || !_currentActiveState.CanBeInterrupted) return;
+        Debug.Log($"Switching to state: {state}");
 
         SwitchState(state);
     }
