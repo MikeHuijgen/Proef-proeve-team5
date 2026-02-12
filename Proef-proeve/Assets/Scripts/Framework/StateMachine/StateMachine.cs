@@ -8,9 +8,8 @@ public class StateMachine : MonoBehaviour
 
     [SerializeField] private IntentToState[] intentDataToStates;
     [SerializeField] private BaseState defaultState;
-    public BaseState _currentActiveState;
+    private BaseState _currentActiveState;
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
-    private StateIntentData _lastStateIntentData;
 
     private void Awake()
     {
@@ -26,7 +25,6 @@ public class StateMachine : MonoBehaviour
     {
         var state = GetStateByIntentData(intentData);
         if (state == null || state == _currentActiveState || !_currentActiveState.CanBeInterrupted) return;
-        _lastStateIntentData = intentData;
 
         SwitchState(state);
     }

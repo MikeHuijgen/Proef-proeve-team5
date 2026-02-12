@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 1612975522}
   - component: {fileID: 1612975521}
   - component: {fileID: 1612975520}
-  - component: {fileID: 1612975519}
+  - component: {fileID: 1612975523}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -498,20 +498,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1612975519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612975518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72591c55e41bc434697245f0e08ae960, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestState
-  canBeInterrupted: 1
-  timerDuration: 2
 --- !u!114 &1612975520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,9 +525,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
   intentDataToStates:
   - stateIntentData: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
-    state: {fileID: 1612975519}
+    state: {fileID: 1612975523}
   defaultState: {fileID: 1612975520}
-  _currentActiveState: {fileID: 0}
 --- !u!4 &1612975522
 Transform:
   m_ObjectHideFlags: 0
@@ -558,6 +543,19 @@ Transform:
   - {fileID: 168614176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1612975523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612975518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58322b9024c077b4fb9e56f78ae48a8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveState
+  canBeInterrupted: 1
 --- !u!1001 &4249368804485178674
 PrefabInstance:
   m_ObjectHideFlags: 0
