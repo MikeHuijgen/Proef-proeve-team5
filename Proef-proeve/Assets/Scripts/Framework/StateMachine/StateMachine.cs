@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public EventHandler<StateIntentData> OnNewActiveState;
+    public static EventHandler<StateIntentData> OnNewActiveState;
 
     [SerializeField] private IntentToState[] intentDataToStates;
     [SerializeField] private BaseState defaultState;
@@ -21,6 +21,7 @@ public class StateMachine : MonoBehaviour
         if (state == null || state == _currentActiveState || !_currentActiveState.CanBeInterrupted) return;
 
         SwitchState(state);
+        OnNewActiveState?.Invoke(this, intentData);
     }
 
     private void SwitchState(BaseState newState)
