@@ -7,8 +7,8 @@ public abstract class BaseState : MonoBehaviour
     protected Action OnStateCompleted;
 
     public abstract void StateEnter(Action OnStateCompleted);
-    public abstract void StateUpdate();
+    public abstract void StateUpdate(float deltaTime);
     public abstract void StateExit();
-    
+
     public bool CanBeInterrupted => _canBeInterrupted;
 }

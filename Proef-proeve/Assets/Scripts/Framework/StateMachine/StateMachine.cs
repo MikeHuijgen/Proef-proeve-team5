@@ -30,6 +30,8 @@ public class StateMachine : MonoBehaviour
         _currentActiveState.StateEnter(OnStateCompleted);
     }
 
+    private void Update() => _currentActiveState.StateUpdate(Time.deltaTime);
+
     private BaseState GetStateByIntentData(StateIntentData intentData)
     {
         _intentDataToStateDictionary.TryGetValue(intentData, out var state);
