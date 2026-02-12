@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public static EventHandler<StateIntentData> OnNewActiveState;
+    public static EventHandler<string> OnNewActiveState;
 
     [SerializeField] private IntentToState[] intentDataToStates;
     [SerializeField] private BaseState defaultState;
     public BaseState _currentActiveState;
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
+    private StateIntentData _lastStateIntentData;
 
     private void Awake()
     {
@@ -25,9 +26,9 @@ public class StateMachine : MonoBehaviour
     {
         var state = GetStateByIntentData(intentData);
         if (state == null || state == _currentActiveState || !_currentActiveState.CanBeInterrupted) return;
+        _lastStateIntentData = intentData;
 
         SwitchState(state);
-        OnNewActiveState?.Invoke(this, intentData);
     }
 
     private void SwitchState(BaseState newState)
@@ -35,6 +36,8 @@ public class StateMachine : MonoBehaviour
         _currentActiveState?.StateExit();
         _currentActiveState = newState;
         _currentActiveState?.StateEnter(OnStateCompleted);
+
+        OnNewActiveState?.Invoke(this, newState.ToString());
     }
 
     private void Update() => _currentActiveState?.StateUpdate(Time.deltaTime);
