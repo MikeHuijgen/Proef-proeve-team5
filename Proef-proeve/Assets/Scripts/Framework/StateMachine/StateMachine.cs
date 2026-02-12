@@ -1,31 +1,40 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    [SerializeField] private IntentToState[] intentToStates;
-    private BaseState _currentState;
-    private Dictionary<int, BaseState> _intentToStateDictionary;
+    public EventHandler<StateIntentData> OnNewActiveState;
 
-    private void OnEnable()
-    {
-        //Hier moeten we op de inputhandler eventhandler aanmelden
-    }
+    [SerializeField] private IntentToState[] intentDataToStates;
+    [SerializeField] private BaseState defaultState;
+    private BaseState _currentActiveState;
+    private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
 
-    void OnDisable()
+    private void OnEnable() => InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
+
+    void OnDisable() => InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+
+    private void OnNewStateIntent(object sender, StateIntentData intentData)
     {
-        //Hier moeten we op de inputhandler eventhandler afmelden 
+        var state = GetStateByIntentData(intentData);
+        if (state == null || state == _currentActiveState || !_currentActiveState.CanBeInterrupted) return;
+
+        SwitchState(state);
     }
 
     private void SwitchState(BaseState newState)
     {
-        _currentState.StateExit();
-        _currentState = newState;
-        _currentState.StateEnter();
+        _currentActiveState.StateExit();
+        _currentActiveState = newState;
+        _currentActiveState.StateEnter(OnStateCompleted);
     }
 
-    private void OnNewIntent()
+    private BaseState GetStateByIntentData(StateIntentData intentData)
     {
-        
+        _intentDataToStateDictionary.TryGetValue(intentData, out var state);
+        return state;
     }
+
+    private void OnStateCompleted() => SwitchState(defaultState);
 }
