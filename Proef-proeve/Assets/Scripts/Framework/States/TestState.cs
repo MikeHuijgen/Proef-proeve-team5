@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TestState : BaseState
 {
-    private float _timerDuration = 2f;
+    [SerializeField] private float timerDuration = 2f;
     private float _currentTimeDuration;
 
     public override void StateEnter(Action onStateCompleted)
@@ -23,7 +23,7 @@ public class TestState : BaseState
 
     private void Timer(float deltaTime)
     {
-        if (_currentTimeDuration < _timerDuration)
+        if (_currentTimeDuration < timerDuration)
         {
             _currentTimeDuration += deltaTime;
         }

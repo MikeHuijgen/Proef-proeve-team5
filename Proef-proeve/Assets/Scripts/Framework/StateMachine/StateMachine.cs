@@ -8,8 +8,10 @@ public class StateMachine : MonoBehaviour
 
     [SerializeField] private IntentToState[] intentDataToStates;
     [SerializeField] private BaseState defaultState;
-    private BaseState _currentActiveState;
+    public BaseState _currentActiveState;
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
+
+    private void Awake() => _currentActiveState = defaultState;
 
     private void OnEnable() => InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
 

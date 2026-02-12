@@ -1,6 +1,5 @@
-using UnityEngine;
-
-public class IntentToState : MonoBehaviour
+[System.Serializable]
+public struct IntentToState
 {
     public StateIntentData stateIntentData;
     public BaseState state;
