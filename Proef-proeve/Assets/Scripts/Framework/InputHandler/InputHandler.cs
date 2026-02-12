@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
-    public EventHandler<IntentData> OnMoveInput;
+    public EventHandler<IntentData> OnNewIntent;
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
         if (Instance != null) Destroy(gameObject);
         Instance = this;
 
-        PopulateDictionary();
+        PopulateDictionaryWithIdAndIntent();
     }
 
     private void OnEnable()
@@ -32,9 +32,9 @@ public class InputHandler : MonoBehaviour
         playerInput.actions["Move"].performed -= OnMoveInputDetected;      
     }
 
-    private void OnMoveInputDetected(InputAction.CallbackContext context) => OnMoveInput?.Invoke(this, GetIntentWithInput(context));
+    private void OnMoveInputDetected(InputAction.CallbackContext context) => OnNewIntent?.Invoke(this, GetIntentByInput(context));
 
-    private void PopulateDictionary()
+    private void PopulateDictionaryWithIdAndIntent()
     {
         _idToIntent = new Dictionary<Guid, IntentData>();
 
@@ -47,12 +47,12 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private IntentData GetIntentWithInput(InputAction.CallbackContext context)
+    private IntentData GetIntentByInput(InputAction.CallbackContext context)
     {
         var action = context.action;
         if (action == null) return null;
-        _idToIntent.TryGetValue(action.id, out var stateIntent);
-        return stateIntent;
+        _idToIntent.TryGetValue(action.id, out var intentData);
+        return intentData;
     }
 
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
