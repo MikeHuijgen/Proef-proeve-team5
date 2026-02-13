@@ -24,7 +24,7 @@ public class StateMachine : MonoBehaviour
     private void OnNewStateIntent(object sender, StateIntentData intentData)
     {
         var state = GetStateByIntentData(intentData);
-        if (state == null || state == _currentActiveState || !_currentActiveState.CanBeInterrupted) return;
+        if (state == null || state == _currentActiveState || !CheckInterruptPromission(state)) return;
 
         SwitchState(state);
     }
@@ -57,5 +57,16 @@ public class StateMachine : MonoBehaviour
             if (_intentDataToStateDictionary.ContainsKey(intentDataToState.stateIntentData)) continue;
             _intentDataToStateDictionary.Add(intentDataToState.stateIntentData, intentDataToState.state);
         }
+    }
+
+    private bool CheckInterruptPromission(BaseState newState)
+    {
+        foreach (var interruptPromission in _currentActiveState.GetInterruptPromission)
+        {
+            if (interruptPromission != newState) continue;
+            return true;
+        }
+
+        return false;
     }
 }
