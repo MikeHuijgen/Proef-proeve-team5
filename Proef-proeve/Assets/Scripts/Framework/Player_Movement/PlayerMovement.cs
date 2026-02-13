@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Transform _worldMiddle;
-    [SerializeField] private Transform _camera;
-    [SerializeField] private Transform _playerBody;
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _rotationSpeed = 10f;
 
-    private CharacterController _characterController;
+    private MovementData _movementData;
+    
     private float _horizontalInput;
     private float _verticalInput;
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
+        _movementData = GetComponent<MovementData>();
     }
 
     private void Update()
     {
-        Vector3 normal = (transform.position - _worldMiddle.position).normalized;
+        Vector3 normal = (transform.position - _movementData.WorldMiddle.position).normalized;
 
         CheckInput();
         AlignToPlanet(normal);
@@ -30,8 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer(Vector3 normal)
     {
-        Vector3 camForward = Vector3.ProjectOnPlane(_camera.forward, normal).normalized;
-        Vector3 camRight   = Vector3.ProjectOnPlane(_camera.right, normal).normalized;
+        Vector3 camForward = Vector3.ProjectOnPlane(_movementData.Camera.forward, normal).normalized;
+        Vector3 camRight   = Vector3.ProjectOnPlane(_movementData.Camera.right, normal).normalized;
 
         Vector3 moveDir = camRight * _horizontalInput + camForward * _verticalInput;
 
@@ -40,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveDir.Normalize();
 
-        _characterController.Move(moveDir * _moveSpeed * Time.deltaTime);
+        _movementData.CharacterController.Move(moveDir * _moveSpeed * Time.deltaTime);
         RotateBodyTowardsMovement(moveDir);
     }
 
@@ -64,8 +62,8 @@ public class PlayerMovement : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, 0f);
 
-        _playerBody.localRotation = Quaternion.Slerp(
-            _playerBody.localRotation,
+        _movementData.PlayerBody.localRotation = Quaternion.Slerp(
+            _movementData.PlayerBody.localRotation,
             targetRotation,
             _rotationSpeed * Time.deltaTime
         );

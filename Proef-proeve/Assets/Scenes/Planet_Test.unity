@@ -183,9 +183,17 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5117700066308340382, guid: 8eb9439b94668ed4ea39c2e417550c40, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8eb9439b94668ed4ea39c2e417550c40, type: 3}
       propertyPath: m_Name
       value: M_Test_Planet
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8eb9439b94668ed4ea39c2e417550c40, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -398,7 +406,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1178631067}
   - component: {fileID: 1178631066}
+  - component: {fileID: 1178631068}
   - component: {fileID: 1178631065}
+  - component: {fileID: 1178631069}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -418,9 +428,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf6e820e38fb63499aebf3a6aa36cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  _worldMiddle: {fileID: 1992422713}
-  _camera: {fileID: 2012662508}
-  _playerBody: {fileID: 1587025395}
   _moveSpeed: 5
   _rotationSpeed: 10
 --- !u!143 &1178631066
@@ -465,6 +472,38 @@ Transform:
   - {fileID: 1766905377}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1178631068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178631064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b745bf2a7ae86e4eadef4a5aba284c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MovementData
+  CharacterController: {fileID: 1178631066}
+  WorldMiddle: {fileID: 1992422713}
+  Camera: {fileID: 2012662508}
+  PlayerBody: {fileID: 1587025395}
+--- !u!114 &1178631069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178631064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9d389af72a95b4185bc082992717fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGravity
+  _groundCheckDistance: 0.5
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1208524062
 GameObject:
   m_ObjectHideFlags: 0
