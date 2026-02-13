@@ -24,9 +24,17 @@ public class StateMachine : MonoBehaviour
     private void OnNewStateIntent(object sender, StateIntentData intentData)
     {
         var state = GetStateByIntentData(intentData);
-        if (state == null || state == _currentActiveState || !CheckInterruptPromission(state)) return;
+        if (!CheckAllConditions(state)) return;
 
         SwitchState(state);
+    }
+
+    private bool CheckAllConditions(BaseState newState)
+    {
+        if (newState == null 
+        || newState == _currentActiveState 
+        || !CheckInterruptPromission(newState)) return false;
+        return true;
     }
 
     private void SwitchState(BaseState newState)
