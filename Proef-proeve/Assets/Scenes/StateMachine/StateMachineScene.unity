@@ -510,7 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6304520fd135a7e4aa266a288e06db95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
-  canBeInterrupted: 1
+  stateInterruptPromission:
+  - {fileID: 1612975523}
+  isGroundedState: 1
 --- !u!114 &1612975521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,7 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58322b9024c077b4fb9e56f78ae48a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveState
-  canBeInterrupted: 1
+  stateInterruptPromission: []
+  isGroundedState: 1
 --- !u!1001 &4249368804485178674
 PrefabInstance:
   m_ObjectHideFlags: 0
