@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 7779ce97a0fd05442a5d0593f226bdac, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b65489bd2b94d274b9d12812504a871a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
---- !u!1 &115041975
+--- !u!1 &1332399253
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,10 +254,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 115041979}
-  - component: {fileID: 115041978}
-  - component: {fileID: 115041977}
-  - component: {fileID: 115041976}
+  - component: {fileID: 1332399257}
+  - component: {fileID: 1332399256}
+  - component: {fileID: 1332399255}
+  - component: {fileID: 1332399254}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -265,13 +265,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &115041976
+--- !u!135 &1332399254
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115041975}
+  m_GameObject: {fileID: 1332399253}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -286,13 +286,13 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &115041977
+--- !u!23 &1332399255
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115041975}
+  m_GameObject: {fileID: 1332399253}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -335,25 +335,25 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &115041978
+--- !u!33 &1332399256
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115041975}
+  m_GameObject: {fileID: 1332399253}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &115041979
+--- !u!4 &1332399257
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115041975}
+  m_GameObject: {fileID: 1332399253}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.04, y: 6.05, z: 16.08}
-  m_LocalScale: {x: 2.2876167, y: 2.2876167, z: 2.2876167}
+  m_LocalPosition: {x: 88.9, y: 35.2, z: 113.8}
+  m_LocalScale: {x: 208.47186, y: 208.47186, z: 208.47186}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -504,16 +504,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.8448806
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.8448806
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6.8448806
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.996332
+      value: -14.152
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.841905
+      value: -19.843
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.023944
+      value: 15.285
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ce505fce274fd3c4aaef8fd28f0650a0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -578,5 +590,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 1869838130}
   - {fileID: 91516490}
-  - {fileID: 115041979}
   - {fileID: 1963612484}
+  - {fileID: 1332399257}

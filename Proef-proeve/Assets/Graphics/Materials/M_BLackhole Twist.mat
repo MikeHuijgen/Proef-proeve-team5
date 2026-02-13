@@ -102,7 +102,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistortianAmount: 10
+    - _DistortianAmount: 11.01
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -123,9 +123,9 @@ Material:
     - _Surface: 0
     - _Twirl_amount: 10
     - _Twirlspeed: 0.8
-    - _Twist_amount: 10
-    - _Twist_strength: 25
-    - _Twistspeed: 0.8
+    - _Twist_amount: 14.93
+    - _Twist_strength: 44.7
+    - _Twistspeed: 0.6
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
