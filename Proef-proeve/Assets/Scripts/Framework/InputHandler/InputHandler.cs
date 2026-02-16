@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
-    public EventHandler<StateIntentData> OnNewStateIntent;
+    public event Action<StateIntentData> OnNewStateIntent;
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
@@ -36,7 +36,7 @@ public class InputHandler : MonoBehaviour
     {
         var stateIntentData = GetIntentDataByInputId(context);
         if(stateIntentData == null) return;
-        OnNewStateIntent?.Invoke(this, stateIntentData);
+        OnNewStateIntent?.Invoke( stateIntentData);
     }
 
     private void PopulateDictionaryWithIdAndIntent()

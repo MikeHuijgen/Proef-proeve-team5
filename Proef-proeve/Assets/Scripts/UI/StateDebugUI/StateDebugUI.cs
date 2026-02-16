@@ -9,7 +9,7 @@ public class StateDebugUI : MonoBehaviour
     private void OnEnable() => StateMachine.OnNewActiveState += UpdateStateDebugUI;
     private void OnDisable() => StateMachine.OnNewActiveState -= UpdateStateDebugUI;
 
-    private void UpdateStateDebugUI(object sender, string stateName)
+    private void UpdateStateDebugUI(string stateName)
     {
         debugText.text = stateName;
     }
