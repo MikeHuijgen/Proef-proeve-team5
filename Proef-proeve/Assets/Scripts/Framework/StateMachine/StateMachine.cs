@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public static EventHandler<string> OnNewActiveState;
+    public static event Action<string> OnNewActiveState;
 
     [SerializeField] private IntentToState[] intentDataToStates;
     [SerializeField] private BaseState defaultState;
@@ -21,7 +21,7 @@ public class StateMachine : MonoBehaviour
 
     void OnDisable() => InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
 
-    private void OnNewStateIntent(object sender, StateIntentData intentData)
+    private void OnNewStateIntent(StateIntentData intentData)
     {
         var state = GetStateByIntentData(intentData);
         if (!CheckAllConditions(state)) return;
@@ -43,7 +43,7 @@ public class StateMachine : MonoBehaviour
         _currentActiveState = newState;
         _currentActiveState?.StateEnter(OnStateCompleted);
 
-        OnNewActiveState?.Invoke(this, newState.ToString());
+        OnNewActiveState?.Invoke(newState.ToString());
     }
 
     private void Update() => _currentActiveState?.StateUpdate(Time.deltaTime);
