@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
-    public EventHandler<IntentData> OnNewIntent;
+    public event Action<StateIntentData> OnNewStateIntent;
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
 
-    private Dictionary<Guid, IntentData> _idToIntent;
+    private Dictionary<Guid, StateIntentData> _idToIntent;
 
     private void Awake()
     {
@@ -24,19 +24,24 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        playerInput.actions["Move"].performed += OnMoveInputDetected;
+        playerInput.actions["Move"].performed += OnIntentInputDetected;
     }
 
     private void OnDisable()
     {
-        playerInput.actions["Move"].performed -= OnMoveInputDetected;      
+        playerInput.actions["Move"].performed -= OnIntentInputDetected;      
     }
 
-    private void OnMoveInputDetected(InputAction.CallbackContext context) => OnNewIntent?.Invoke(this, GetIntentByInput(context));
+    private void OnIntentInputDetected(InputAction.CallbackContext context)
+    {
+        var stateIntentData = GetIntentDataByInputId(context);
+        if(stateIntentData == null) return;
+        OnNewStateIntent?.Invoke( stateIntentData);
+    }
 
     private void PopulateDictionaryWithIdAndIntent()
     {
-        _idToIntent = new Dictionary<Guid, IntentData>();
+        _idToIntent = new Dictionary<Guid, StateIntentData>();
 
         foreach (var inputToIntent in inputToIntents)
         {
@@ -47,7 +52,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    private IntentData GetIntentByInput(InputAction.CallbackContext context)
+    private StateIntentData GetIntentDataByInputId(InputAction.CallbackContext context)
     {
         var action = context.action;
         if (action == null) return null;
