@@ -4,5 +4,5 @@ using UnityEngine.InputSystem;
 public struct InputToIntent
 {
     public InputActionReference inputActionReference;
-    public IntentData intentSO;
+    public StateIntentData intentSO;
 }
