@@ -33,7 +33,7 @@ public class StateMachine : MonoBehaviour
     {
         if (newState == null 
         || newState == _currentActiveState 
-        || !CheckInterruptPromission(newState)) return false;
+        || !CheckInterruptPermission(newState)) return false;
         return true;
     }
 
@@ -67,11 +67,13 @@ public class StateMachine : MonoBehaviour
         }
     }
 
-    private bool CheckInterruptPromission(BaseState newState)
+    private bool CheckInterruptPermission(BaseState newState)
     {
-        foreach (var interruptPromission in _currentActiveState.GetInterruptPromission)
+        if (_currentActiveState == null) return false;
+
+        foreach (var interruptPermission in _currentActiveState.GetInterruptPermission)
         {
-            if (interruptPromission != newState) continue;
+            if (interruptPermission != newState) continue;
             return true;
         }
 

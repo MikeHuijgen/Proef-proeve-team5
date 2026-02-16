@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class BaseState : MonoBehaviour
 {
-    [SerializeField] private List<BaseState> stateInterruptPromission = new List<BaseState>();
+    [SerializeField] private List<BaseState> stateInterruptPermission = new List<BaseState>();
     [SerializeField] private bool isGroundedState = true;
     protected Action _onStateCompleted;
 
@@ -12,5 +12,5 @@ public abstract class BaseState : MonoBehaviour
     public abstract void StateUpdate(float deltaTime);
     public abstract void StateExit();
 
-    public List<BaseState> GetInterruptPromission => stateInterruptPromission;
+    public List<BaseState> GetInterruptPermission => stateInterruptPermission;
 }
