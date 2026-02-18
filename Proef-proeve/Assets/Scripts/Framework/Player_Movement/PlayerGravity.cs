@@ -1,44 +1,30 @@
 using UnityEngine;
 
-public class PlayerGravity : MonoBehaviour
+public class PlayerGravity : MovementComponent
 {
-    [SerializeField] private float _groundCheckDistance = 1.2f;
-    [SerializeField] private LayerMask _groundLayer;
-    
-    public bool IsGrounded { get; private set; }
+    [SerializeField] private float gravityStrength = 20f;
+    [SerializeField] private float groundedGravity = 5f;
 
-    private MovementData _movementData;
+    public Vector3 GravityVelocity { get; private set; }
 
-    private void Awake()
+    private GroundCheck _groundCheck;
+
+    private void Start()
     {
-        _movementData = GetComponent<MovementData>();
+        _groundCheck = GetComponent<GroundCheck>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        DoGroundCheck();
-        ApplyGravity();
+        var gravityDir = -transform.up;
+
+        if (_groundCheck != null && _groundCheck.IsGrounded)
+        {
+            GravityVelocity = gravityDir * groundedGravity;
+        }
+        else
+        {
+            GravityVelocity += gravityDir * (gravityStrength * Time.deltaTime);
+        }
     }
-
-    private void DoGroundCheck()
-    {
-        Vector3 origin = transform.position;
-        Vector3 direction = (_movementData.WorldMiddle.position - transform.position).normalized;
-
-        IsGrounded = Physics.Raycast(
-            origin,
-            direction,
-            _groundCheckDistance,
-            _groundLayer
-        );
-
-        Debug.DrawRay(origin, direction * _groundCheckDistance,
-            IsGrounded ? Color.green : Color.red);
-    }
-
-    private void ApplyGravity()
-    {
-        
-    }
-
 }

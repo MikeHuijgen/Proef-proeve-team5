@@ -7,7 +7,6 @@ public class MovementData : MonoBehaviour
     public Transform Camera;
     public Transform PlayerBody;
     public Vector3 Velocity { get; private set; }
-
     
     private Vector3 _lastPosition;
     
