@@ -965,7 +965,7 @@
         "m_Id": "94d3cd56abca45058dc8b21eb1fe002c"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZWriteControl": 0,
     "m_ZTestMode": 4,
     "m_AlphaMode": 0,
@@ -4242,8 +4242,8 @@
     "m_ObjectId": "ea948ac23f95456aa7c15c1c1eb8c5ef",
     "m_Title": "Core",
     "m_Position": {
-        "x": -1375.2000732421875,
-        "y": 148.00001525878907
+        "x": -1375.2001953125,
+        "y": 147.99998474121095
     }
 }
 
