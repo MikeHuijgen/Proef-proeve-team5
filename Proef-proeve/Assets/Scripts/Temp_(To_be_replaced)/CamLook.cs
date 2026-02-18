@@ -9,6 +9,7 @@ public class CamLook : MonoBehaviour
     private InputAction lookAction;
 
     private float yaw;
+    private float xaw;
 
     private void Awake()
     {
@@ -28,14 +29,19 @@ public class CamLook : MonoBehaviour
     private void Start()
     {
         yaw = transform.eulerAngles.y;
+        xaw = transform.eulerAngles.x;
     }
 
     private void Update()
     {
         Vector2 lookDelta = lookAction.ReadValue<Vector2>();
 
+        xaw = Mathf.Clamp(xaw, -45f, 45f);
+
         yaw += lookDelta.x * sensitivity;
 
-        transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
+        xaw += lookDelta.y * sensitivity;
+
+        transform.localRotation = Quaternion.Euler(xaw, yaw, 0f);
     }
 }
