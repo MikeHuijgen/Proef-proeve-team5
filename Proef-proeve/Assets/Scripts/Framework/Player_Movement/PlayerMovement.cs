@@ -9,10 +9,12 @@ public class PlayerMovement : MovementComponent
     private float _verticalInput;
 
     private PlayerGravity _gravity;
+    private GroundCheck _groundCheck;
 
     private void Start()
     {
         _gravity = GetComponent<PlayerGravity>();
+        _groundCheck = GetComponent<GroundCheck>();
     }
 
     private void Update()
@@ -22,9 +24,17 @@ public class PlayerMovement : MovementComponent
 
         CheckInput();
 
-        _gravity.UpdateGravity(-planetNormal);
+        if (_groundCheck != null && _groundCheck.IsGrounded)
+        {
+            _gravity.ResetGravity();
+        }
+        else
+        {
+            _gravity.UpdateGravity(-planetNormal);
+        }
 
         MovePlayer(planetNormal);
+
         AlignToPlanet(planetNormal);
     }
 
@@ -44,20 +54,17 @@ public class PlayerMovement : MovementComponent
         if (inputMoveDir.sqrMagnitude > 0.001f)
         {
             inputMoveDir.Normalize();
-            horizontalVelocity = inputMoveDir * _moveSpeed;
+            
+            inputMoveDir = Vector3.ProjectOnPlane(inputMoveDir, normal).normalized;
 
+            horizontalVelocity = inputMoveDir * _moveSpeed;
             RotateBodyTowardsMovement(inputMoveDir);
         }
 
         Vector3 verticalVelocity = _gravity.GravityVelocity;
-        
         Vector3 totalVelocity = horizontalVelocity + verticalVelocity;
 
-        MovementData.CharacterController.Move(
-            totalVelocity * Time.deltaTime
-        );
-        
-        
+        MovementData.CharacterController.Move(totalVelocity * Time.deltaTime);
     }
 
     private void AlignToPlanet(Vector3 normal)
@@ -87,6 +94,6 @@ public class PlayerMovement : MovementComponent
     {
         Vector2 input = InputHandler.Instance.GetMoveValue();
         _horizontalInput = input.x;
-        _verticalInput   = input.y;
+        _verticalInput = input.y;
     }
 }

@@ -2,59 +2,56 @@ using UnityEngine;
 
 public class GroundCheck : MovementComponent
 {
-    [SerializeField] private float _groundCheckDistance = 1.2f;
+    [SerializeField] private float _groundCheckDistance = 0.05f;
     [SerializeField] private LayerMask _groundLayer;
-    
-    public bool IsGrounded { get; private set; }
 
-    private void FixedUpdate()
+    [Tooltip("How much smaller than CharacterController.radius the ground check sphere should be.")]
+    [SerializeField] private float _radiusInset = 0.01f;
+
+    public bool IsGrounded { get; set; }
+    public RaycastHit GroundHit { get; private set; }
+
+    private void Update()
     {
         DoGroundCheck();
     }
 
-    /*private void DoGroundCheck()
-    {
-        Vector3 origin = transform.position;
-        float radius = MovementData.CharacterController.radius;
-        Vector3 direction = (MovementData.WorldMiddle.position - transform.position).normalized;
-
-        IsGrounded = Physics.SphereCast(
-            origin,
-            radius,
-            direction,
-            _groundCheckDistance,
-            _groundLayer
-        );
-
-        Debug.DrawRay(origin, direction * _groundCheckDistance,
-            IsGrounded ? Color.green : Color.red);
-    }*/
-    
     private void DoGroundCheck()
     {
-        float radius = MovementData.CharacterController.radius;
-        float skin = 0.05f;
+        CharacterController cc = MovementData.CharacterController;
 
-        Vector3 gravityDown = (MovementData.WorldMiddle.position - transform.position).normalized;
-        Vector3 gravityUp   = -gravityDown;
-        
-        Vector3 origin = transform.position + gravityUp * (radius + skin);
+        Vector3 gravityDown = (MovementData.WorldMiddle.position - GetControllerCenterWorld(cc)).normalized;
+
+        float castRadius = Mathf.Max(0.001f, cc.radius - _radiusInset);
+
+        float halfHeight = Mathf.Max(cc.height * 0.5f, cc.radius);
+        float bottomHemisphereCenterOffset = halfHeight - cc.radius;
+
+        Vector3 controllerCenterWorld = GetControllerCenterWorld(cc);
+
+        float castDistance = bottomHemisphereCenterOffset + _groundCheckDistance;
 
         IsGrounded = Physics.SphereCast(
-            origin,
-            radius,
+            controllerCenterWorld,
+            castRadius,
             gravityDown,
             out RaycastHit hit,
-            _groundCheckDistance,
+            castDistance,
             _groundLayer,
             QueryTriggerInteraction.Ignore
         );
 
+        GroundHit = hit;
+
         Debug.DrawRay(
-            origin,
-            gravityDown * _groundCheckDistance,
+            controllerCenterWorld,
+            gravityDown * castDistance,
             IsGrounded ? Color.green : Color.red
         );
     }
 
+    private static Vector3 GetControllerCenterWorld(CharacterController cc)
+    {
+        return cc.transform.TransformPoint(cc.center);
+    }
 }

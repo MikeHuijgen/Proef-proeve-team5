@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 610374166}
   - component: {fileID: 610374165}
   - component: {fileID: 610374164}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,8 +739,9 @@ GameObject:
   - component: {fileID: 1178631068}
   - component: {fileID: 1178631065}
   - component: {fileID: 1178631070}
+  - component: {fileID: 1178631071}
   - component: {fileID: 1178631069}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,10 +845,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92433700067642c45bf20d7d05210241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GroundCheck
-  _groundCheckDistance: 1.1
+  _groundCheckDistance: 0.1
   _groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  _radiusInset: 0.01
+--- !u!114 &1178631071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178631064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9760f92c6668824fb056f959b293fcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
 --- !u!1 &1208524062
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +1001,7 @@ GameObject:
   - component: {fileID: 1331675839}
   - component: {fileID: 1331675838}
   - component: {fileID: 1331675837}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1098,7 +1112,7 @@ GameObject:
   - component: {fileID: 1587025395}
   - component: {fileID: 1587025397}
   - component: {fileID: 1587025396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1433,7 +1447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766905377}
   - component: {fileID: 1766905376}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CamHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1602,7 @@ GameObject:
   - component: {fileID: 2012662507}
   - component: {fileID: 2012662506}
   - component: {fileID: 2012662509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
