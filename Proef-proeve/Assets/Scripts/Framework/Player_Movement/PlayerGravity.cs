@@ -1,30 +1,33 @@
 using UnityEngine;
 
-public class PlayerGravity : MovementComponent
+[RequireComponent(typeof(CharacterController))]
+public class PlayerGravity : MonoBehaviour
 {
-    [SerializeField] private float gravityStrength = 20f;
-    [SerializeField] private float groundedGravity = 5f;
+    [SerializeField] private float _gravityStrength = 20f;
 
     public Vector3 GravityVelocity { get; private set; }
 
-    private GroundCheck _groundCheck;
+    private CharacterController _controller;
 
-    private void Start()
+    private void Awake()
     {
-        _groundCheck = GetComponent<GroundCheck>();
+        _controller = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    public void UpdateGravity(Vector3 gravityDirection)
     {
-        var gravityDir = -transform.up;
-
-        if (_groundCheck != null && _groundCheck.IsGrounded)
+        if (_controller.isGrounded)
         {
-            GravityVelocity = gravityDir * groundedGravity;
+            GravityVelocity = gravityDirection * 2f;
         }
         else
         {
-            GravityVelocity += gravityDir * (gravityStrength * Time.deltaTime);
+            GravityVelocity += gravityDirection * _gravityStrength * Time.deltaTime;
         }
+    }
+
+    public void ResetGravity()
+    {
+        GravityVelocity = Vector3.zero;
     }
 }

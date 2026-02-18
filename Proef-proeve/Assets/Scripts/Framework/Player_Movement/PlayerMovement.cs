@@ -1,5 +1,3 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MovementComponent
@@ -19,33 +17,47 @@ public class PlayerMovement : MovementComponent
 
     private void Update()
     {
-        Vector3 normal = (transform.position - MovementData.WorldMiddle.position).normalized;
+        Vector3 planetNormal =
+            (transform.position - MovementData.WorldMiddle.position).normalized;
 
         CheckInput();
-        MovePlayer(normal);
-        AlignToPlanet(normal);
+
+        _gravity.UpdateGravity(-planetNormal);
+
+        MovePlayer(planetNormal);
+        AlignToPlanet(planetNormal);
     }
 
     private void MovePlayer(Vector3 normal)
     {
-        Vector3 camForward = Vector3.ProjectOnPlane(MovementData.Camera.forward, normal).normalized;
-        Vector3 camRight   = Vector3.ProjectOnPlane(MovementData.Camera.right, normal).normalized;
+        Vector3 camForward =
+            Vector3.ProjectOnPlane(MovementData.Camera.forward, normal).normalized;
 
-        Vector3 inputMoveDir = camRight * _horizontalInput + camForward * _verticalInput;
+        Vector3 camRight =
+            Vector3.ProjectOnPlane(MovementData.Camera.right, normal).normalized;
+
+        Vector3 inputMoveDir =
+            camRight * _horizontalInput + camForward * _verticalInput;
 
         Vector3 horizontalVelocity = Vector3.zero;
-        if (inputMoveDir.sqrMagnitude >= 0.001f)
+
+        if (inputMoveDir.sqrMagnitude > 0.001f)
         {
             inputMoveDir.Normalize();
             horizontalVelocity = inputMoveDir * _moveSpeed;
 
             RotateBodyTowardsMovement(inputMoveDir);
         }
-        
-        Vector3 verticalVelocity = _gravity != null ? _gravity.GravityVelocity : Vector3.zero;
+
+        Vector3 verticalVelocity = _gravity.GravityVelocity;
         
         Vector3 totalVelocity = horizontalVelocity + verticalVelocity;
-        MovementData.CharacterController.Move(totalVelocity * Time.deltaTime);
+
+        MovementData.CharacterController.Move(
+            totalVelocity * Time.deltaTime
+        );
+        
+        
     }
 
     private void AlignToPlanet(Vector3 normal)
@@ -59,7 +71,8 @@ public class PlayerMovement : MovementComponent
     private void RotateBodyTowardsMovement(Vector3 moveDir)
     {
         Vector3 localMoveDir = transform.InverseTransformDirection(moveDir);
-        float targetYaw = Mathf.Atan2(localMoveDir.x, localMoveDir.z) * Mathf.Rad2Deg;
+        float targetYaw =
+            Mathf.Atan2(localMoveDir.x, localMoveDir.z) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, 0f);
 
