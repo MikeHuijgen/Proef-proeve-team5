@@ -782,7 +782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenStick
   m_MovementRange: 50
   m_DynamicOriginRange: 100
-  m_ControlPath: <Gamepad>/leftStick
+  m_ControlPath: <AndroidJoystick>/stick
   m_Behaviour: 0
   m_UseIsolatedInputActions: 0
   m_PointerDownAction:
