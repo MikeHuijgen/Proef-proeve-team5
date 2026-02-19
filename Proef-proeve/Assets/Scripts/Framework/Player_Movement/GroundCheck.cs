@@ -8,7 +8,7 @@ public class GroundCheck : MovementComponent
     [Tooltip("How much smaller than CharacterController.radius the ground check sphere should be.")]
     [SerializeField] private float _radiusInset = 0.01f;
 
-    public bool IsGrounded { get; set; }
+    public bool IsGrounded { get; private set; }
     public RaycastHit GroundHit { get; private set; }
 
     private void Update()
@@ -20,14 +20,14 @@ public class GroundCheck : MovementComponent
     {
         CharacterController cc = MovementData.CharacterController;
 
-        Vector3 gravityDown = (MovementData.WorldMiddle.position - GetControllerCenterWorld(cc)).normalized;
+        Vector3 controllerCenterWorld = GetControllerCenterWorld(cc);
+
+        Vector3 gravityDown = (MovementData.WorldMiddle.position - controllerCenterWorld).normalized;
 
         float castRadius = Mathf.Max(0.001f, cc.radius - _radiusInset);
 
         float halfHeight = Mathf.Max(cc.height * 0.5f, cc.radius);
         float bottomHemisphereCenterOffset = halfHeight - cc.radius;
-
-        Vector3 controllerCenterWorld = GetControllerCenterWorld(cc);
 
         float castDistance = bottomHemisphereCenterOffset + _groundCheckDistance;
 

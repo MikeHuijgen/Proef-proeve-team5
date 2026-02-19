@@ -19,58 +19,58 @@ public class PlayerMovement : MovementComponent
 
     private void Update()
     {
-        Vector3 planetNormal =
-            (transform.position - MovementData.WorldMiddle.position).normalized;
-
         CheckInput();
 
-        if (_groundCheck != null && _groundCheck.IsGrounded)
+        var cc = MovementData.CharacterController;
+
+        Vector3 controllerCenterWorld = GetControllerCenterWorld(cc);
+        Vector3 planetUp = (controllerCenterWorld - MovementData.WorldMiddle.position).normalized;
+        Vector3 gravityDown = -planetUp;
+
+        bool grounded = _groundCheck != null && _groundCheck.IsGrounded;
+
+        Vector3 movePlaneNormal = planetUp;
+        if (grounded)
         {
-            _gravity.ResetGravity();
-        }
-        else
-        {
-            _gravity.UpdateGravity(-planetNormal);
+            Vector3 n = _groundCheck.GroundHit.normal;
+            if (n.sqrMagnitude > 0.0001f) movePlaneNormal = n.normalized;
         }
 
-        MovePlayer(planetNormal);
+        _gravity.UpdateGravity(gravityDown, grounded);
 
-        AlignToPlanet(planetNormal);
+        Vector3 horizontalVelocity = ComputeHorizontalVelocity(movePlaneNormal);
+
+        cc.Move(horizontalVelocity * Time.deltaTime);
+        cc.Move(_gravity.GravityVelocity * Time.deltaTime);
+
+        AlignToPlanet(planetUp);
     }
 
-    private void MovePlayer(Vector3 normal)
+    private Vector3 ComputeHorizontalVelocity(Vector3 movePlaneNormal)
     {
         Vector3 camForward =
-            Vector3.ProjectOnPlane(MovementData.Camera.forward, normal).normalized;
+            Vector3.ProjectOnPlane(MovementData.Camera.forward, movePlaneNormal).normalized;
 
         Vector3 camRight =
-            Vector3.ProjectOnPlane(MovementData.Camera.right, normal).normalized;
+            Vector3.ProjectOnPlane(MovementData.Camera.right, movePlaneNormal).normalized;
 
-        Vector3 inputMoveDir =
-            camRight * _horizontalInput + camForward * _verticalInput;
+        Vector3 inputMoveDir = camRight * _horizontalInput + camForward * _verticalInput;
 
-        Vector3 horizontalVelocity = Vector3.zero;
+        if (inputMoveDir.sqrMagnitude <= 0.001f)
+            return Vector3.zero;
 
-        if (inputMoveDir.sqrMagnitude > 0.001f)
-        {
-            inputMoveDir.Normalize();
-            
-            inputMoveDir = Vector3.ProjectOnPlane(inputMoveDir, normal).normalized;
+        inputMoveDir.Normalize();
+        inputMoveDir = Vector3.ProjectOnPlane(inputMoveDir, movePlaneNormal).normalized;
 
-            horizontalVelocity = inputMoveDir * _moveSpeed;
-            RotateBodyTowardsMovement(inputMoveDir);
-        }
+        RotateBodyTowardsMovement(inputMoveDir);
 
-        Vector3 verticalVelocity = _gravity.GravityVelocity;
-        Vector3 totalVelocity = horizontalVelocity + verticalVelocity;
-
-        MovementData.CharacterController.Move(totalVelocity * Time.deltaTime);
+        return inputMoveDir * _moveSpeed;
     }
 
-    private void AlignToPlanet(Vector3 normal)
+    private void AlignToPlanet(Vector3 planetUp)
     {
         Quaternion targetRotation =
-            Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
+            Quaternion.FromToRotation(transform.up, planetUp) * transform.rotation;
 
         transform.rotation = targetRotation;
     }
@@ -78,8 +78,7 @@ public class PlayerMovement : MovementComponent
     private void RotateBodyTowardsMovement(Vector3 moveDir)
     {
         Vector3 localMoveDir = transform.InverseTransformDirection(moveDir);
-        float targetYaw =
-            Mathf.Atan2(localMoveDir.x, localMoveDir.z) * Mathf.Rad2Deg;
+        float targetYaw = Mathf.Atan2(localMoveDir.x, localMoveDir.z) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, 0f);
 
@@ -95,5 +94,10 @@ public class PlayerMovement : MovementComponent
         Vector2 input = InputHandler.Instance.GetMoveValue();
         _horizontalInput = input.x;
         _verticalInput = input.y;
+    }
+
+    private static Vector3 GetControllerCenterWorld(CharacterController cc)
+    {
+        return cc.transform.TransformPoint(cc.center);
     }
 }

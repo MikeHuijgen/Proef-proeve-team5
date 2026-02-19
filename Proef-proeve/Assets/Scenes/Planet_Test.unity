@@ -498,7 +498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &610374164
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -782,7 +782,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 1
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -833,6 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerGravity
   _gravityStrength: 20
+  _groundSnapSpeed: 2
 --- !u!114 &1178631070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,6 +863,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9760f92c6668824fb056f959b293fcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
+  _jumpHeight: 6
+  jumpAction:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 82073629-7c9f-4ba5-8d41-0eaf4ca44c6c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 9e5b2be4-9d93-4e36-ab0b-8745c3865e0e
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &1208524062
 GameObject:
   m_ObjectHideFlags: 0
