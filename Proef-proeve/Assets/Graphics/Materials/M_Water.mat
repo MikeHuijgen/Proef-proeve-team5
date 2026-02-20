@@ -138,7 +138,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Lijn_strenght: 4
+    - _Lijn_strenght: 6.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -156,8 +156,8 @@ Material:
     - _Surface: 0
     - _Wateralpha: 0.05
     - _Waterdepth: 10
-    - _Watersize: 109.6
-    - _Waterspeed: 1.75
+    - _Watersize: 135.78
+    - _Waterspeed: 0.91
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
@@ -168,8 +168,10 @@ Material:
     - _Deep_color: {r: 0.13508277, g: 0.22264141, b: 0.1323246, a: 0.19607843}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Foamcolor: {r: 0.9924528, g: 0.9924528, b: 0.9924528, a: 1}
+    - _Lijnkleur: {r: 0.7349163, g: 0.8747332, b: 0.8792453, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Surface_color: {r: 0.44657168, g: 0.78113204, b: 0.58322304, a: 0.5803922}
+    - _Waterkleur: {r: 0.28284088, g: 0.6603774, b: 0.6499655, a: 0}
     - _Witte_lijn_water: {r: 0.7349163, g: 0.8747332, b: 0.8792453, a: 0.5294118}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
