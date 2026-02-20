@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 1612975521}
   - component: {fileID: 1612975520}
   - component: {fileID: 1612975523}
+  - component: {fileID: 1612975524}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -510,8 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6304520fd135a7e4aa266a288e06db95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IdleState
-  stateInterruptPromission:
-  - {fileID: 1612975523}
+  stateInterruptPermission: []
   isGroundedState: 1
 --- !u!114 &1612975521
 MonoBehaviour:
@@ -557,8 +557,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58322b9024c077b4fb9e56f78ae48a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MoveState
-  stateInterruptPromission: []
+  stateInterruptPermission: []
   isGroundedState: 1
+--- !u!114 &1612975524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612975518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a658283ec17d24da1bc790b92b1ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StunState
+  stateInterruptPermission: []
+  isGroundedState: 1
+  stunDuration: 3
 --- !u!1001 &4249368804485178674
 PrefabInstance:
   m_ObjectHideFlags: 0
