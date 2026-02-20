@@ -21,7 +21,7 @@ public class StateMachine : MonoBehaviour
 
     void OnDisable() => InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
 
-    private void OnNewStateIntent(StateIntentData intentData)
+    public void OnNewStateIntent(StateIntentData intentData)
     {
         var state = GetStateByIntentData(intentData);
         if (!CheckAllConditions(state)) return;

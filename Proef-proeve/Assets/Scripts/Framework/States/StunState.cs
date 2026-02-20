@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class StunState : BaseState
 {
-    [SerializeField] private float stunDuration; 
-    private CountdownTimer stunCountdownTimer;
+    [SerializeField] private float stunDuration;
+
+    private CountdownTimer _stunCountdownTimer;
 
     public override void StateEnter(Action onStateCompleted)
     {
         _onStateCompleted = onStateCompleted;
-        stunCountdownTimer = new CountdownTimer(stunDuration);
+        _stunCountdownTimer = new CountdownTimer(stunDuration);
     }
 
     public override void StateExit()
@@ -19,9 +20,9 @@ public class StunState : BaseState
 
     public override void StateUpdate(float deltaTime)
     {
-        stunCountdownTimer.Tick(deltaTime);
+        _stunCountdownTimer.Tick(deltaTime);
 
-        if (!stunCountdownTimer.IsTimerDone)
+        if (!_stunCountdownTimer.IsTimerDone)
         _onStateCompleted();
     }
 
