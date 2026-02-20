@@ -1,5 +1,3 @@
-using System;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MovementComponent
@@ -11,47 +9,68 @@ public class PlayerMovement : MovementComponent
     private float _verticalInput;
 
     private PlayerGravity _gravity;
+    private GroundCheck _groundCheck;
 
     private void Start()
     {
         _gravity = GetComponent<PlayerGravity>();
+        _groundCheck = GetComponent<GroundCheck>();
     }
 
     private void Update()
     {
-        Vector3 normal = (transform.position - MovementData.WorldMiddle.position).normalized;
-
         CheckInput();
-        MovePlayer(normal);
-        AlignToPlanet(normal);
+
+        var cc = MovementData.CharacterController;
+
+        Vector3 controllerCenterWorld = GetControllerCenterWorld(cc);
+        Vector3 planetUp = (controllerCenterWorld - MovementData.WorldMiddle.position).normalized;
+        Vector3 gravityDown = -planetUp;
+
+        bool grounded = _groundCheck != null && _groundCheck.IsGrounded;
+
+        Vector3 movePlaneNormal = planetUp;
+        if (grounded)
+        {
+            Vector3 n = _groundCheck.GroundHit.normal;
+            if (n.sqrMagnitude > 0.0001f) movePlaneNormal = n.normalized;
+        }
+
+        _gravity.UpdateGravity(gravityDown, grounded);
+
+        Vector3 horizontalVelocity = ComputeHorizontalVelocity(movePlaneNormal);
+
+        cc.Move(horizontalVelocity * Time.deltaTime);
+        cc.Move(_gravity.GravityVelocity * Time.deltaTime);
+
+        AlignToPlanet(planetUp);
     }
 
-    private void MovePlayer(Vector3 normal)
+    private Vector3 ComputeHorizontalVelocity(Vector3 movePlaneNormal)
     {
-        Vector3 camForward = Vector3.ProjectOnPlane(MovementData.Camera.forward, normal).normalized;
-        Vector3 camRight   = Vector3.ProjectOnPlane(MovementData.Camera.right, normal).normalized;
+        Vector3 camForward =
+            Vector3.ProjectOnPlane(MovementData.Camera.forward, movePlaneNormal).normalized;
+
+        Vector3 camRight =
+            Vector3.ProjectOnPlane(MovementData.Camera.right, movePlaneNormal).normalized;
 
         Vector3 inputMoveDir = camRight * _horizontalInput + camForward * _verticalInput;
 
-        Vector3 horizontalVelocity = Vector3.zero;
-        if (inputMoveDir.sqrMagnitude >= 0.001f)
-        {
-            inputMoveDir.Normalize();
-            horizontalVelocity = inputMoveDir * _moveSpeed;
+        if (inputMoveDir.sqrMagnitude <= 0.001f)
+            return Vector3.zero;
 
-            RotateBodyTowardsMovement(inputMoveDir);
-        }
-        
-        Vector3 verticalVelocity = _gravity != null ? _gravity.GravityVelocity : Vector3.zero;
-        
-        Vector3 totalVelocity = horizontalVelocity + verticalVelocity;
-        MovementData.CharacterController.Move(totalVelocity * Time.deltaTime);
+        inputMoveDir.Normalize();
+        inputMoveDir = Vector3.ProjectOnPlane(inputMoveDir, movePlaneNormal).normalized;
+
+        RotateBodyTowardsMovement(inputMoveDir);
+
+        return inputMoveDir * _moveSpeed;
     }
 
-    private void AlignToPlanet(Vector3 normal)
+    private void AlignToPlanet(Vector3 planetUp)
     {
         Quaternion targetRotation =
-            Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
+            Quaternion.FromToRotation(transform.up, planetUp) * transform.rotation;
 
         transform.rotation = targetRotation;
     }
@@ -74,6 +93,11 @@ public class PlayerMovement : MovementComponent
     {
         Vector2 input = InputHandler.Instance.GetMoveValue();
         _horizontalInput = input.x;
-        _verticalInput   = input.y;
+        _verticalInput = input.y;
+    }
+
+    private static Vector3 GetControllerCenterWorld(CharacterController cc)
+    {
+        return cc.transform.TransformPoint(cc.center);
     }
 }

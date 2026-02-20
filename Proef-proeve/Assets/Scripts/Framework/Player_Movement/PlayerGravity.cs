@@ -1,30 +1,42 @@
 using UnityEngine;
 
-public class PlayerGravity : MovementComponent
+public class PlayerGravity : MonoBehaviour
 {
-    [SerializeField] private float gravityStrength = 20f;
-    [SerializeField] private float groundedGravity = 5f;
+    [SerializeField] private float _gravityStrength = 20f;
+
+    public float GravityStrength => _gravityStrength;
+
+    public float DownSpeed { get; private set; }
 
     public Vector3 GravityVelocity { get; private set; }
 
-    private GroundCheck _groundCheck;
-
-    private void Start()
+    public void UpdateGravity(Vector3 gravityDown, bool isGrounded)
     {
-        _groundCheck = GetComponent<GroundCheck>();
-    }
+        if (gravityDown.sqrMagnitude < 0.0001f)
+            return;
 
-    private void Update()
-    {
-        var gravityDir = -transform.up;
+        gravityDown.Normalize();
 
-        if (_groundCheck != null && _groundCheck.IsGrounded)
+        if (isGrounded)
         {
-            GravityVelocity = gravityDir * groundedGravity;
+            if (DownSpeed > 0f) DownSpeed = 0f;
         }
         else
         {
-            GravityVelocity += gravityDir * (gravityStrength * Time.deltaTime);
+            DownSpeed += _gravityStrength * Time.deltaTime;
         }
+
+        GravityVelocity = gravityDown * DownSpeed;
+    }
+
+    public void Jump(float jumpSpeed)
+    {
+        DownSpeed = -jumpSpeed;
+    }
+
+    public void ResetGravity()
+    {
+        DownSpeed = 0f;
+        GravityVelocity = Vector3.zero;
     }
 }
