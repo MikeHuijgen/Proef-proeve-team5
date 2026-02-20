@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9ca8afa76f6968142bbb5c6c5859f6c6, type: 2}
     - target: {fileID: 919132149155446097, guid: ca5884db44775e648920707b47dc0ff8, type: 3}
       propertyPath: m_Name
-      value: ship_parts_5
+      value: P_ship_parts_5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -88,6 +88,6 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1430590514721885144, guid: ca5884db44775e648920707b47dc0ff8, type: 3}
