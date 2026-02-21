@@ -6,12 +6,12 @@ public class DurationTimer : Timer
     public DurationTimer(float timeDuration)
     {
         timer_duration = timeDuration;
-        RestartTimer();
+        ResetTimer();
     }
 
-    public override void RestartTimer()
+    public override void ResetTimer()
     {
-        base.RestartTimer();
+        base.ResetTimer();
         current_time = 0;
     }
 

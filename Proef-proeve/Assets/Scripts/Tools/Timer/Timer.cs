@@ -12,10 +12,10 @@ public abstract class Timer
     public void StopTimer()
     {
         is_timer_active = false;
-        RestartTimer();
+        ResetTimer();
     }
 
-    public virtual void RestartTimer() => is_timer_done = false;
+    public virtual void ResetTimer() => is_timer_done = false;
     public void UnPauseTimer() => is_timer_paused = false;
     public void PauseTimer() => is_timer_paused = true;
     public abstract void Tick(float deltaTime);
