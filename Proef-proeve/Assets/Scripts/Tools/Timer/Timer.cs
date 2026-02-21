@@ -15,16 +15,10 @@ public abstract class Timer
         RestartTimer();
     }
 
-    public virtual void RestartTimer()
-    {
-        is_timer_done = false;
-    }
-
+    public virtual void RestartTimer() => is_timer_done = false;
     public void UnPauseTimer() => is_timer_paused = false;
     public void PauseTimer() => is_timer_paused = true;
-
     public abstract void Tick(float deltaTime);
-
     public bool IsTimerDone => is_timer_done;
     public float GetCurrentTime => current_time;
     public bool IsTimerActive => is_timer_active;
