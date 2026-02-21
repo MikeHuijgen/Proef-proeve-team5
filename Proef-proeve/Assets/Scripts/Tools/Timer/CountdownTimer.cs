@@ -6,9 +6,15 @@ public class CountdownTimer : Timer
         RestartTimer();
     }
 
+    public override void RestartTimer()
+    {
+        base.RestartTimer();
+        current_time = timer_duration;
+    }
+
     public override void Tick(float deltaTime)
     {
-        if (is_timer_done || is_timer_paused) return;
+        if (is_timer_done || is_timer_paused || !is_timer_active) return;
 
         current_time -= deltaTime;
 

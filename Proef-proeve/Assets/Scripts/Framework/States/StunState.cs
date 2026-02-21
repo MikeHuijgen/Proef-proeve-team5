@@ -11,6 +11,7 @@ public class StunState : BaseState
     {
         _onStateCompleted = onStateCompleted;
         _stunCountdownTimer = new CountdownTimer(stunDuration);
+        _stunCountdownTimer.StartTimer();
     }
 
     public override void StateExit()
@@ -22,7 +23,8 @@ public class StunState : BaseState
     {
         _stunCountdownTimer.Tick(deltaTime);
 
-        if (!_stunCountdownTimer.IsTimerDone)
+        if (!_stunCountdownTimer.IsTimerDone) return;
+        _stunCountdownTimer.StopTimer();
         _onStateCompleted();
     }
 
