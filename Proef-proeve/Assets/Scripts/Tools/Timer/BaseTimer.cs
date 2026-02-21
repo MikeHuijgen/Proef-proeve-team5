@@ -1,4 +1,4 @@
-public abstract class Timer 
+public abstract class BaseTimer 
 {
     protected float timer_duration;
     protected float current_time;

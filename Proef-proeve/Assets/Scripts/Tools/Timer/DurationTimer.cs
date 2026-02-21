@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DurationTimer : Timer
+public class DurationTimer : BaseTimer
 {
     public DurationTimer(){}
     public DurationTimer(float timeDuration)

@@ -1,4 +1,4 @@
-public class CountdownTimer : Timer
+public class CountdownTimer : BaseTimer
 {
     public CountdownTimer(float timeDuration)
     {
