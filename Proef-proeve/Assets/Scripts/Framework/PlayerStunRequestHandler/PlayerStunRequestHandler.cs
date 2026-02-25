@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,7 +10,7 @@ public class PlayerStunRequestHandler : MonoBehaviour
 
     private void Awake() => _countDownTimer = new CountdownTimer(coolDownTime);
 
-    public void HandleStunRequest()
+    public void RequestStun()
     {
         if(_countDownTimer.IsTimerActive) return;
         _countDownTimer.StartTimer();
