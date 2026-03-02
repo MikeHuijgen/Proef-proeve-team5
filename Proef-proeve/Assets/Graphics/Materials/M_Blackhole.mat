@@ -122,15 +122,15 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistortionStrength: -0.65
+    - _DistortionStrength: -0.28
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HoleSize: 0.04
-    - _Lightscale: 6.52
+    - _HoleSize: -0.07
+    - _Lightscale: 7.42
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
