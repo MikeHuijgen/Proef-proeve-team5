@@ -46,5 +46,5 @@ public class OxygenComponent : MonoBehaviour
         OnUpdatedOxygen?.Invoke(_currentOxygen);
     }
 
-    public void ExitOxygenSystem() => _isRefillingOxygen = false;
+    public void ExitOxygenStation() => _isRefillingOxygen = false;
 }

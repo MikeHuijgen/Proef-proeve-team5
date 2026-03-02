@@ -19,7 +19,7 @@ public class OxygenStation : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        _oxygenComponent.ExitOxygenSystem();
+        _oxygenComponent.ExitOxygenStation();
         _oxygenComponent = null;
     }
 }
