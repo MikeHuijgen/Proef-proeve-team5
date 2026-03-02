@@ -10,18 +10,28 @@ public class StateMachine : MonoBehaviour
     [SerializeField] private BaseState defaultState;
     private BaseState _currentActiveState;
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
+    private PlayerStunRequestHandler _playerStunRequestHandler;
 
     private void Awake()
     {
+        _playerStunRequestHandler = GetComponent<PlayerStunRequestHandler>();
         PopulateIntentDataToStateDictionary();
         SwitchState(defaultState);
     }
 
-    private void OnEnable() => InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
+    private void OnEnable()
+    {
+        InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
+        _playerStunRequestHandler.OnStunRequest += OnNewStateIntent;
+    }
 
-    void OnDisable() => InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+    void OnDisable()
+    {
+        InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+        _playerStunRequestHandler.OnStunRequest -= OnNewStateIntent;
+    }
 
-    private void OnNewStateIntent(StateIntentData intentData)
+    public void OnNewStateIntent(StateIntentData intentData)
     {
         var state = GetStateByIntentData(intentData);
         if (!CheckAllConditions(state)) return;
