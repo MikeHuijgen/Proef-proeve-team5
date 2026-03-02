@@ -7,7 +7,11 @@ public abstract class BaseTimer
 
     protected bool is_timer_active;
 
-    public void StartTimer() => is_timer_active = true;
+    public void StartTimer()
+    {
+        is_timer_active = true;
+        ResetTimer();
+    }
 
     public void StopTimer()
     {

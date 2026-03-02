@@ -1,12 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerStunRequestHandler : MonoBehaviour
 {
     [SerializeField] private float coolDownTime;
+    [SerializeField] private StateIntentData stunIntentReference;
     private CountdownTimer _countDownTimer;
-
-    public UnityEvent OnValidStunRequest = new UnityEvent();
+    public event Action<StateIntentData> OnStunRequest;
 
     private void Awake() => _countDownTimer = new CountdownTimer(coolDownTime);
 
@@ -14,7 +15,7 @@ public class PlayerStunRequestHandler : MonoBehaviour
     {
         if(_countDownTimer.IsTimerActive) return;
         _countDownTimer.StartTimer();
-        OnValidStunRequest?.Invoke();
+        OnStunRequest?.Invoke(stunIntentReference);
     }
 
     private void Update()
