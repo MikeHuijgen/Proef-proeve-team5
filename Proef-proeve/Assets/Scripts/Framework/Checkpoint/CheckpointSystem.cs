@@ -12,7 +12,6 @@ public class CheckpointSystem : MonoBehaviour
 
     private void Awake()
     {
-        // Simple singleton
         if (Instance == null)
             Instance = this;
         else
@@ -21,18 +20,24 @@ public class CheckpointSystem : MonoBehaviour
 
     private void Start()
     {
-        // If no checkpoint touched yet, use default spawn
         currentCheckpoint = defaultSpawnPoint;
     }
 
     public void SetCheckpoint(Transform newCheckpoint)
     {
+        // Prevent redundant updates
+        if (currentCheckpoint == newCheckpoint)
+            return;
+
         currentCheckpoint = newCheckpoint;
         Debug.Log("Checkpoint Updated: " + newCheckpoint.name);
     }
 
     public void RespawnPlayer()
     {
+        if (currentCheckpoint == null)
+            currentCheckpoint = defaultSpawnPoint;
+
         CharacterController controller = player.GetComponent<CharacterController>();
 
         if (controller != null)
@@ -43,5 +48,7 @@ public class CheckpointSystem : MonoBehaviour
 
         if (controller != null)
             controller.enabled = true;
+
+        Debug.Log("Player Respawned");
     }
 }
