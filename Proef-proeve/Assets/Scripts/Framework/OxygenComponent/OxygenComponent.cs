@@ -1,0 +1,50 @@
+using System;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class OxygenComponent : MonoBehaviour
+{
+    [SerializeField] private float maxOxygen = 100f;
+    public UnityEvent OnNoOxygenLeft = new UnityEvent();
+    public static event Action<float> OnUpdatedOxygen;
+
+    private float _currentOxygen;
+    private bool _isRefillingOxygen;
+    private bool _oxygenIsMaxed;
+
+    private void Awake() => ResetOxygen();
+    private void Update() => DecreaseOxygen();
+
+    public void RefillOxygenByAmount(float amount)
+    {
+        if (_oxygenIsMaxed) return;
+        _isRefillingOxygen = true;
+        _currentOxygen += amount;
+        OnUpdatedOxygen?.Invoke(_currentOxygen);
+
+        if (_currentOxygen < maxOxygen) return;
+        _oxygenIsMaxed = true;
+        _currentOxygen = maxOxygen;
+    }
+
+    private void DecreaseOxygen()
+    {
+        if (_isRefillingOxygen) return;
+        _oxygenIsMaxed = false;
+        _currentOxygen -= Time.deltaTime;
+        OnUpdatedOxygen?.Invoke(_currentOxygen);
+
+        if (_currentOxygen > 0) return;
+        OnNoOxygenLeft?.Invoke();
+    }
+
+    private void ResetOxygen()
+    {
+        _currentOxygen = maxOxygen;
+        _isRefillingOxygen = false;
+        _oxygenIsMaxed = true;
+        OnUpdatedOxygen?.Invoke(_currentOxygen);
+    }
+
+    public void ExitOxygenSystem() => _isRefillingOxygen = false;
+}
