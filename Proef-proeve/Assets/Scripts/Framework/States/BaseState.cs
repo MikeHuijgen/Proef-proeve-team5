@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class BaseState : MonoBehaviour
 {
     [SerializeField] private List<BaseState> stateInterruptPermission = new List<BaseState>();
-    [SerializeField] private bool isGroundedState = true;
+    [SerializeField] private bool allowedInAirborne = true;
 
     protected Action _onStateCompleted;
 
@@ -15,5 +16,5 @@ public abstract class BaseState : MonoBehaviour
 
     public List<BaseState> GetInterruptPermission => stateInterruptPermission;
 
-    public bool IsGroundedState => isGroundedState;
+    public bool AllowedInAirborne => allowedInAirborne;
 }

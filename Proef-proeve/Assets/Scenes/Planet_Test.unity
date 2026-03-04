@@ -6188,7 +6188,7 @@ MonoBehaviour:
   stateInterruptPermission:
   - {fileID: 1178631076}
   - {fileID: 1178631077}
-  isGroundedState: 1
+  allowedInAirborne: 1
   groundMoveSpeed: 5
   groundRotationSpeed: 10
   airMoveSpeed: 5
@@ -6209,7 +6209,7 @@ MonoBehaviour:
   stateInterruptPermission:
   - {fileID: 1178631074}
   - {fileID: 1178631076}
-  isGroundedState: 1
+  allowedInAirborne: 1
 --- !u!114 &1178631076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6224,7 +6224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JumpState
   stateInterruptPermission:
   - {fileID: 1178631074}
-  isGroundedState: 1
+  allowedInAirborne: 1
   jumpHeight: 2
   jumpStateDuration: 0.05
 --- !u!114 &1178631077
@@ -6241,7 +6241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FallingState
   stateInterruptPermission:
   - {fileID: 1178631074}
-  isGroundedState: 1
+  allowedInAirborne: 1
 --- !u!1 &1203018742
 GameObject:
   m_ObjectHideFlags: 0

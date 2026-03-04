@@ -9,6 +9,13 @@ public class JumpState : BaseState
     private float _timer;
     private MovementData _movementData;
 
+    private GroundCheck _groundCheck;
+
+    private void Start()
+    {
+        _groundCheck = GetComponent<GroundCheck>();
+    }
+    
     private void Awake()
     {
         _movementData = GetComponent<MovementData>();
@@ -16,6 +23,8 @@ public class JumpState : BaseState
 
     public override void StateEnter(Action onStateCompleted)
     {
+        Debug.Log("Buhhhh");
+        
         _onStateCompleted = onStateCompleted;
 
         _movementData.JumpHeight = jumpHeight;

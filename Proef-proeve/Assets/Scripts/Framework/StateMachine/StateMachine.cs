@@ -42,9 +42,11 @@ public class StateMachine : MonoBehaviour
 
     private bool CheckAllConditions(BaseState newState)
     {
-        if (newState == null 
-            || newState == _currentActiveState
-            || !CheckInterruptPermission(newState)) return false;
+        if (newState == null) return false;
+
+        if (!newState.AllowedInAirborne && !_groundCheck.IsGrounded) return false;
+        
+        if (newState == _currentActiveState || !CheckInterruptPermission(newState)) return false;
 
         return true;
     }
