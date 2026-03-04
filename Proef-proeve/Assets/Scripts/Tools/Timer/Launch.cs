@@ -10,7 +10,12 @@ public class Launch : MonoBehaviour
 
     [SerializeField] float travelTime;
 
+    float timer;
+    float elapsedTime;
     float planetDistance;
+    float journey;
+
+    bool isTravel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,16 +25,33 @@ public class Launch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        travelTime = speed * Time.deltaTime;
+    // Check if travel is true, and if it is Gameobject start traveling.
+        if (isTravel)
+        {
+            elapsedTime = (Time.time - timer) * speed;
+            Traveling();
+        }
+    }
 
+    void Traveling()
+    {
+        // check the distandce between planets and devide it with the time it will take to get there.
+        journey = elapsedTime / planetDistance;
+        transform.position = Vector3.Lerp(startLocation.position, endLocation.position, journey);
+        // reset the journey if it is done.
+        if (journey >= 1f)
+        {
+            isTravel = false;
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject == canon)
+        // if player makes collision with somting, travel is true than.
+        if (collision.gameObject == canon)
         {
-            float journey = planetDistance / travelTime;
-            transform.position = Vector3.Lerp(startLocation.position, endLocation.position, journey);
+            timer = Time.time;
+            isTravel =  true;
             Debug.Log("travel");
         }
     }
