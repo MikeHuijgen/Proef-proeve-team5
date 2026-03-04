@@ -6,6 +6,7 @@ public abstract class BaseState : MonoBehaviour
 {
     [SerializeField] private List<BaseState> stateInterruptPermission = new List<BaseState>();
     [SerializeField] private bool isGroundedState = true;
+
     protected Action _onStateCompleted;
 
     public abstract void StateEnter(Action onStateCompleted);
@@ -13,4 +14,6 @@ public abstract class BaseState : MonoBehaviour
     public abstract void StateExit();
 
     public List<BaseState> GetInterruptPermission => stateInterruptPermission;
+
+    public bool IsGroundedState => isGroundedState;
 }

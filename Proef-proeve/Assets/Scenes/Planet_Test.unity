@@ -6038,6 +6038,7 @@ GameObject:
   - component: {fileID: 1178631075}
   - component: {fileID: 1178631074}
   - component: {fileID: 1178631076}
+  - component: {fileID: 1178631077}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -6153,13 +6154,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StateMachine
   intentDataToStates:
-  - stateIntentData: {fileID: 11400000, guid: f619c13f900017644a56cec3e604e886, type: 2}
-    state: {fileID: 1178631075}
   - stateIntentData: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
     state: {fileID: 1178631074}
   - stateIntentData: {fileID: 11400000, guid: deb6b54be8255a144bd32fd80d84d599, type: 2}
     state: {fileID: 1178631076}
-  defaultState: {fileID: 1178631075}
+  defaultGroundedState: {fileID: 1178631075}
+  defaultAirborneState: {fileID: 1178631077}
 --- !u!114 &1178631073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6187,10 +6187,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MoveState
   stateInterruptPermission:
   - {fileID: 1178631076}
+  - {fileID: 1178631077}
   isGroundedState: 1
-  moveSpeed: 5
-  rotationSpeed: 10
-  stopThreshold: 0.1
+  groundMoveSpeed: 5
+  groundRotationSpeed: 10
+  airMoveSpeed: 5
+  airRotationSpeed: 8
+  inputDeadzone: 0.05
 --- !u!114 &1178631075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6220,28 +6223,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpState
   stateInterruptPermission:
-  - {fileID: 0}
+  - {fileID: 1178631074}
   isGroundedState: 1
-  jumpHeight: 6
-  jumpAction:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: bfb1307b-1032-4b49-8eba-b5ba42624a59
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: a63e3642-08d2-4826-baa1-aafca2677e9c
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Jump
-      m_Flags: 0
-    m_Flags: 0
-  coyoteTime: 0.12
-  jumpBufferTime: 0.12
+  jumpHeight: 2
+  jumpStateDuration: 0.05
+--- !u!114 &1178631077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178631064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc12b346e9f5154faf7bf17de2e90e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FallingState
+  stateInterruptPermission:
+  - {fileID: 1178631074}
+  isGroundedState: 1
 --- !u!1 &1203018742
 GameObject:
   m_ObjectHideFlags: 0

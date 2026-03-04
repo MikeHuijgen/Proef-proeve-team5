@@ -3,42 +3,56 @@ using UnityEngine;
 
 public class MoveState : BaseState
 {
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float rotationSpeed = 10f;
-    [SerializeField] private float stopThreshold = 0.1f;
+    [Header("Ground")]
+    [SerializeField] private float groundMoveSpeed = 5f;
+    [SerializeField] private float groundRotationSpeed = 10f;
+
+    [Header("Air")]
+    [SerializeField] private float airMoveSpeed = 3.5f;
+    [SerializeField] private float airRotationSpeed = 8f;
+
+    [SerializeField] private float inputDeadzone = 0.05f;
 
     private MovementData _movementData;
+    private GroundCheck _groundCheck;
 
     private void Awake()
     {
         _movementData = GetComponent<MovementData>();
+        _groundCheck = GetComponent<GroundCheck>();
     }
 
     public override void StateEnter(Action onStateCompleted)
     {
         _onStateCompleted = onStateCompleted;
-        _movementData.MoveSpeed = moveSpeed;
-        _movementData.RotationSpeed = rotationSpeed;
     }
 
     public override void StateUpdate(float deltaTime)
     {
-        Vector2 input = InputHandler.Instance.GetMoveValue();
+        Vector2 input = InputHandler.Instance != null ? InputHandler.Instance.GetMoveValue() : Vector2.zero;
+        if (input.magnitude < inputDeadzone) input = Vector2.zero;
+
         _movementData.MoveInput = input;
 
-        // Optional: keep these set while in the state
-        _movementData.MoveSpeed = moveSpeed;
-        _movementData.RotationSpeed = rotationSpeed;
+        bool grounded = _groundCheck != null && _groundCheck.IsGrounded;
 
-        // Only exit MoveState when player stops moving
-        if (input.magnitude <= stopThreshold)
+        if (grounded)
         {
-            _onStateCompleted?.Invoke(); // returns to defaultState (likely Idle)
+            _movementData.MoveSpeed = groundMoveSpeed;
+            _movementData.RotationSpeed = groundRotationSpeed;
         }
+        else
+        {
+            _movementData.MoveSpeed = airMoveSpeed;
+            _movementData.RotationSpeed = airRotationSpeed;
+        }
+        
+        if (input.magnitude <= 0.05) _onStateCompleted?.Invoke();
+        
     }
 
     public override void StateExit()
     {
-        _movementData.MoveInput = Vector2.zero;
+        
     }
 }
