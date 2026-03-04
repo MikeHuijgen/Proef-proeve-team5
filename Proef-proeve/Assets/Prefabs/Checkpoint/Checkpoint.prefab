@@ -66,9 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf701ce0ec54e340ab4fcf192b3185a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
-  Particles:
-  - {fileID: 1194211801074702268}
+  particles:
   - {fileID: 5932171550921511539}
+  - {fileID: 1194211801074702268}
 --- !u!1001 &533310063542161881
 PrefabInstance:
   m_ObjectHideFlags: 0
