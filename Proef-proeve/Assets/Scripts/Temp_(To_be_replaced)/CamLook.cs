@@ -3,7 +3,6 @@ using UnityEngine.InputSystem;
 
 public class CamLook : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float sensitivity = 0.15f;
 
     private InputAction lookAction;
@@ -11,20 +10,6 @@ public class CamLook : MonoBehaviour
     private float yaw;
     private float xaw;
 
-    private void Awake()
-    {
-        lookAction = playerInput.actions["Look"];
-    }
-
-    private void OnEnable()
-    {
-        lookAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        lookAction.Disable();
-    }
 
     private void Start()
     {
@@ -34,11 +19,12 @@ public class CamLook : MonoBehaviour
 
     private void Update()
     {
-        Vector2 lookDelta = lookAction.ReadValue<Vector2>();
+
+        Vector2 lookDelta = InputHandler.Instance.GetCameraValue();
 
         xaw = Mathf.Clamp(xaw, -45f, 45f);
 
-        yaw += lookDelta.x * sensitivity;
+        yaw += lookDelta.x *- sensitivity;
 
         xaw += lookDelta.y * sensitivity;
 

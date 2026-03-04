@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
+    private InputAction lookAction;
     public event Action<StateIntentData> OnNewStateIntent;
 
     [SerializeField] private PlayerInput playerInput;
@@ -61,4 +62,6 @@ public class InputHandler : MonoBehaviour
     }
 
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
+
+    public Vector2 GetCameraValue() => playerInput.actions["look"].ReadValue<Vector2>();
 }
