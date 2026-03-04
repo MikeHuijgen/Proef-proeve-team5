@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem[] Particles;
+    [SerializeField] private ParticleSystem[] particles;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,7 +19,7 @@ public class Checkpoint : MonoBehaviour
 
     private void PlayParticles()
     {
-        foreach (var ps in Particles)
+        foreach (var ps in particles)
         {
             ps.Play();
         }

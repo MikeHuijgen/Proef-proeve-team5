@@ -5,8 +5,8 @@ public class CheckpointSystem : MonoBehaviour
     public static CheckpointSystem Instance;
 
     [Header("References")]
-    [SerializeField] private Transform Player;
-    [SerializeField] private Transform DefaultSpawnPoint;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform defaultSpawnPoint;
 
     private Checkpoint _currentCheckpoint;
 
@@ -30,18 +30,18 @@ public class CheckpointSystem : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        Transform spawnPoint = DefaultSpawnPoint;
+        Transform spawnPoint = defaultSpawnPoint;
 
         if (_currentCheckpoint != null)
             spawnPoint = _currentCheckpoint.transform;
 
-        CharacterController controller = Player.GetComponent<CharacterController>();
+        CharacterController controller = player.GetComponent<CharacterController>();
 
         if (controller != null)
             controller.enabled = false;
 
-        Player.position = spawnPoint.position;
-        Player.rotation = spawnPoint.rotation;
+        player.position = spawnPoint.position;
+        player.rotation = spawnPoint.rotation;
 
         if (controller != null)
             controller.enabled = true;
