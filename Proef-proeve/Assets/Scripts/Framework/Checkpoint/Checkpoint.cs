@@ -2,34 +2,26 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem checkpointParticle;
-
-    private bool isActivated = false;
+    [SerializeField] private ParticleSystem[] Particles;
 
     private void OnTriggerEnter(Collider other)
     {
-        // Only respond to player
         if (!other.CompareTag("Player"))
             return;
 
-        // If already activated, do nothing
-        if (isActivated)
-            return;
-
-        ActivateCheckpoint();
+        CheckpointSystem.Instance.SetCheckpoint(this);
     }
 
-    private void ActivateCheckpoint()
+    public void Activate()
     {
-        isActivated = true;
+        PlayParticles();
+    }
 
-        // Tell system this is now the active checkpoint
-        CheckpointSystem.Instance.SetCheckpoint(transform);
-
-        // Play particle once
-        if (checkpointParticle != null)
-            checkpointParticle.Play();
-
-        Debug.Log("Checkpoint Activated: " + gameObject.name);
+    private void PlayParticles()
+    {
+        foreach (var ps in Particles)
+        {
+            ps.Play();
+        }
     }
 }

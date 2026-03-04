@@ -5,10 +5,10 @@ public class CheckpointSystem : MonoBehaviour
     public static CheckpointSystem Instance;
 
     [Header("References")]
-    [SerializeField] private Transform player;
-    [SerializeField] private Transform defaultSpawnPoint;
+    [SerializeField] private Transform Player;
+    [SerializeField] private Transform DefaultSpawnPoint;
 
-    private Transform currentCheckpoint;
+    private Checkpoint _currentCheckpoint;
 
     private void Awake()
     {
@@ -18,37 +18,32 @@ public class CheckpointSystem : MonoBehaviour
             Destroy(gameObject);
     }
 
-    private void Start()
+    public void SetCheckpoint(Checkpoint newCheckpoint)
     {
-        currentCheckpoint = defaultSpawnPoint;
-    }
-
-    public void SetCheckpoint(Transform newCheckpoint)
-    {
-        // Prevent redundant updates
-        if (currentCheckpoint == newCheckpoint)
+        if (_currentCheckpoint == newCheckpoint)
             return;
 
-        currentCheckpoint = newCheckpoint;
-        Debug.Log("Checkpoint Updated: " + newCheckpoint.name);
+        _currentCheckpoint = newCheckpoint;
+
+        _currentCheckpoint.Activate();
     }
 
     public void RespawnPlayer()
     {
-        if (currentCheckpoint == null)
-            currentCheckpoint = defaultSpawnPoint;
+        Transform spawnPoint = DefaultSpawnPoint;
 
-        CharacterController controller = player.GetComponent<CharacterController>();
+        if (_currentCheckpoint != null)
+            spawnPoint = _currentCheckpoint.transform;
+
+        CharacterController controller = Player.GetComponent<CharacterController>();
 
         if (controller != null)
             controller.enabled = false;
 
-        player.position = currentCheckpoint.position;
-        player.rotation = currentCheckpoint.rotation;
+        Player.position = spawnPoint.position;
+        Player.rotation = spawnPoint.rotation;
 
         if (controller != null)
             controller.enabled = true;
-
-        Debug.Log("Player Respawned");
     }
 }
