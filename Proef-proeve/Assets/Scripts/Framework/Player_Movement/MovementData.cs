@@ -15,6 +15,9 @@ public class MovementData : MonoBehaviour
     public float RotationSpeed = 10;
     public bool JumpRequested;
     public float JumpHeight = 6f;
+    
+    public float CoyoteTime = 0.12f;
+    public float JumpBufferTime = 0.12f;
 
     private Vector3 _lastPosition;
 

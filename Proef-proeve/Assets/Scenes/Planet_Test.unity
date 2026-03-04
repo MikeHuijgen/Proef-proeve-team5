@@ -6110,6 +6110,8 @@ MonoBehaviour:
   RotationSpeed: 10
   JumpRequested: 0
   JumpHeight: 6
+  CoyoteTime: 0.12
+  JumpBufferTime: 0.12
 --- !u!114 &1178631069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6224,7 +6226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JumpState
   stateInterruptPermission:
   - {fileID: 1178631074}
-  allowedInAirborne: 1
+  allowedInAirborne: 0
   jumpHeight: 2
   jumpStateDuration: 0.05
 --- !u!114 &1178631077

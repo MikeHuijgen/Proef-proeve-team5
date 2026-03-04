@@ -9,6 +9,8 @@ public class InputHandler : MonoBehaviour
     public static InputHandler Instance;
     public event Action<StateIntentData> OnNewStateIntent;
 
+    public event Action OnNewJumpInput;
+
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
 
@@ -27,14 +29,14 @@ public class InputHandler : MonoBehaviour
     private void OnEnable()
     {
         playerInput.actions["Move"].performed += OnIntentInputDetected;
-        playerInput.actions["Jump"].performed += OnIntentInputDetected;
+        playerInput.actions["Jump"].performed += OnJumpInputDetected;
         playerInput.actions["Move"].started += StoreMoveActionCallback;
     }
 
     private void OnDisable()
     {
         playerInput.actions["Move"].performed -= OnIntentInputDetected;      
-        playerInput.actions["Jump"].performed -= OnIntentInputDetected;  
+        playerInput.actions["Jump"].performed -= OnJumpInputDetected;  
         playerInput.actions["Move"].started -= StoreMoveActionCallback;
     }
 
@@ -54,6 +56,9 @@ public class InputHandler : MonoBehaviour
         if(stateIntentData == null) return;
         OnNewStateIntent?.Invoke( stateIntentData);
     }
+    
+    private void OnJumpInputDetected(InputAction.CallbackContext context) => OnNewJumpInput?.Invoke();
+    
 
     private void PopulateDictionaryWithIdAndIntent()
     {

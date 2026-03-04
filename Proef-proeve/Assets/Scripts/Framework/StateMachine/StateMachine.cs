@@ -17,10 +17,12 @@ public class StateMachine : MonoBehaviour
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
 
     private GroundCheck _groundCheck;
+    private JumpBuffer _jumpBuffer;
 
     private void Start()
     {
         _groundCheck = GetComponent<GroundCheck>();
+        _jumpBuffer = GetComponent<JumpBuffer>();
     }
 
     private void Awake()
@@ -29,8 +31,17 @@ public class StateMachine : MonoBehaviour
         SwitchState(defaultGroundedState);
     }
 
-    private void OnEnable() => InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
-    private void OnDisable() => InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+    private void OnEnable()
+    {
+        InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
+        _jumpBuffer.OnConfirmJump += OnNewStateIntent;
+    }
+
+    private void OnDisable()
+    {
+        InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+        _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
+    }
 
     private void OnNewStateIntent(StateIntentData intentData)
     {

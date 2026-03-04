@@ -31,7 +31,7 @@ public class MovementMotor : MovementComponent
             Vector3 n = _groundCheck.GroundHit.normal;
             if (n.sqrMagnitude > 0.0001f) movePlaneNormal = n.normalized;
         }
-
+        
         if (MovementData.JumpRequested && grounded)
         {
             float jumpSpeed = Mathf.Sqrt(2f * _gravity.GravityStrength * MovementData.JumpHeight);
