@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class Launch : MonoBehaviour
 {
-    [SerializeField] float speed;
+    [SerializeField] private float speed;
 
-    [SerializeField] Transform startLocation;
-    [SerializeField] Transform endLocation;
-    [SerializeField] GameObject canon;
+    [SerializeField] private Transform startLocation;
+    [SerializeField] private Transform endLocation;
+    [SerializeField] private GameObject canon;
 
     [SerializeField] float travelTime;
 
-    float timer;
-    float elapsedTime;
-    float planetDistance;
-    float journey;
+    private float timer;
+    private float elapsedTime;
+    private float planetDistance;
+    private float journey;
 
-    bool isTravel;
+    private bool isTravel;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         planetDistance = Vector3.Distance(startLocation.position, endLocation.position);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
     // Check if travel is true, and if it is Gameobject start traveling.
         if (isTravel)
@@ -33,7 +33,7 @@ public class Launch : MonoBehaviour
         }
     }
 
-    void Traveling()
+    private void Traveling()
     {
         // check the distandce between planets and devide it with the time it will take to get there.
         journey = elapsedTime / planetDistance;
@@ -52,7 +52,6 @@ public class Launch : MonoBehaviour
         {
             timer = Time.time;
             isTravel =  true;
-            Debug.Log("travel");
         }
     }
 }
