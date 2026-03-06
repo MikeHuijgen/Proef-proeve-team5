@@ -64,7 +64,7 @@ ModelImporter:
       takeName: Player_rig|Player_falling
       internalID: -3980392481561595796
       firstFrame: 0
-      lastFrame: 27
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -93,7 +93,7 @@ ModelImporter:
       takeName: Player_rig|Player_idle
       internalID: 566275775110226008
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -151,7 +151,7 @@ ModelImporter:
       takeName: Player_rig|Player_landing
       internalID: -1176435371750685891
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -180,7 +180,7 @@ ModelImporter:
       takeName: Player_rig|Player_runcycle
       internalID: 6582319783918087350
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -209,7 +209,7 @@ ModelImporter:
       takeName: Player_rig|Player_walkcycle
       internalID: -2472555010509756085
       firstFrame: 0
-      lastFrame: 26
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
