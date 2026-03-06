@@ -9,9 +9,10 @@ public class PlayerStunRequestHandler : MonoBehaviour
     private CountdownTimer _countDownTimer;
     public event Action<StateIntentData> OnStunRequest;
 
-    private void Awake() => _countDownTimer = new CountdownTimer(coolDownTime);
+    private void Start() => _countDownTimer = new CountdownTimer(coolDownTime);
 
-    private void Start() => StunState.OnStunStateExit += StartCountdown;
+    private void OnEnable() => StunState.OnStunStateExit += StartCountdown;
+    private void OnDisable() => StunState.OnStunStateExit -= StartCountdown;
 
     public void RequestStun()
     {
