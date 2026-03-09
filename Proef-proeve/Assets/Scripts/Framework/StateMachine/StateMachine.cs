@@ -15,6 +15,7 @@ public class StateMachine : MonoBehaviour
 
     private BaseState _currentActiveState;
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
+    private PlayerStunRequestHandler _playerStunRequestHandler;
 
     private GroundCheck _groundCheck;
     private JumpBuffer _jumpBuffer;
@@ -27,6 +28,7 @@ public class StateMachine : MonoBehaviour
 
     private void Awake()
     {
+        _playerStunRequestHandler = GetComponent<PlayerStunRequestHandler>();
         PopulateIntentDataToStateDictionary();
         SwitchState(defaultGroundedState);
     }
@@ -45,9 +47,16 @@ public class StateMachine : MonoBehaviour
 
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
+        _playerStunRequestHandler.OnStunRequest += OnNewStateIntent;
     }
 
-    private void OnNewStateIntent(StateIntentData intentData)
+    void OnDisable()
+    {
+        InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+        _playerStunRequestHandler.OnStunRequest -= OnNewStateIntent;
+    }
+
+    public void OnNewStateIntent(StateIntentData intentData)
     {
         var state = GetStateByIntentData(intentData);
         if (!CheckAllConditions(state)) return;
