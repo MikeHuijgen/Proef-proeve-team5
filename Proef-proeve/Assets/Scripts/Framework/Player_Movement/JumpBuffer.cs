@@ -1,68 +1,77 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(MovementData))]
+[RequireComponent(typeof(GroundCheck))]
 public class JumpBuffer : MonoBehaviour
 {
-    private bool _isJumping = false;
-    private bool _bufferActive = false;
-    
-    private float _coyoteTimer;
-    private float _jumpBufferTimer;
-
-    private PlayerGravity _gravity;
+    private MovementData _movementData;
     private GroundCheck _groundCheck;
-    
-    public event Action<StateIntentData> OnConfirmJump;
 
+    private float _coyoteTimer;
+    private float _bufferTimer;
+
+    public event Action<StateIntentData> OnConfirmJump;
     [SerializeField] private StateIntentData jumpIntentData;
 
-    private void Start()
+    private void Awake()
     {
-        _gravity = GetComponent<PlayerGravity>();
+        _movementData = GetComponent<MovementData>();
         _groundCheck = GetComponent<GroundCheck>();
     }
 
     private void OnEnable()
     {
-        InputHandler.Instance.OnNewJumpInput += OnNewJumpInput;
+        if (InputHandler.Instance != null)
+            InputHandler.Instance.OnNewJumpInput += OnNewJumpInput;
     }
-    
+
     private void OnDisable()
     {
-        InputHandler.Instance.OnNewJumpInput -= OnNewJumpInput;
+        if (InputHandler.Instance != null)
+            InputHandler.Instance.OnNewJumpInput -= OnNewJumpInput;
     }
 
     private void Update()
     {
         float dt = Time.deltaTime;
 
-        if (_groundCheck.IsGrounded)
-            _coyoteTimer = 000000;
-        else
-            _coyoteTimer -= dt;
-
-        if (_isJumping)
+        if (_groundCheck != null && _groundCheck.IsGrounded)
         {
-            /*_jumpBufferTimer = _jumpBufferTime;*/
+            _coyoteTimer = _movementData != null ? _movementData.CoyoteTime : 0f;
         }
         else
-            _jumpBufferTimer -= dt;
-
-        if (_jumpBufferTimer > 0f && (_groundCheck.IsGrounded || _coyoteTimer > 0f))
         {
-            
-            _jumpBufferTimer = 0f;
+            _coyoteTimer -= dt;
+        }
+
+        if (_bufferTimer > 0f)
+            _bufferTimer -= dt;
+
+        bool canJumpNow = (_groundCheck != null && _groundCheck.IsGrounded) || _coyoteTimer > 0f;
+
+        if (_bufferTimer > 0f && canJumpNow)
+        {
+            if (_movementData != null)
+                _movementData.JumpRequested = true;
+
+            _bufferTimer = 0f;
             _coyoteTimer = 0f;
         }
     }
-    
+
     private void OnNewJumpInput()
     {
-        if (!_bufferActive) _isJumping = true;
-        
+        if (_movementData != null)
+            _bufferTimer = _movementData.JumpBufferTime;
+        else
+            _bufferTimer = 0.12f;
+
         OnConfirmJump?.Invoke(jumpIntentData);
     }
+
+    public void QueueJump()
+    {
+        OnNewJumpInput();
+    }
 }
-
-
-
