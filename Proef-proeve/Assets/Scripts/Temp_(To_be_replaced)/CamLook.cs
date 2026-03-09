@@ -58,8 +58,8 @@ public class CamLook : MonoBehaviour
         _lookDelta = InputHandler.Instance.GetCameraValue();
         if (_lookDelta == Vector2.zero) return;
 
-        _yaw += _lookDelta.x * -sensitivity;
-        _xaw += _lookDelta.y * sensitivity;
+        _yaw += _lookDelta.x * sensitivity;
+        _xaw += _lookDelta.y * -sensitivity;
 
         _xaw = Mathf.Clamp(_xaw, -45f, 45f);
 
