@@ -1,19 +1,26 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch;
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
-    private InputAction lookAction;
     public event Action<StateIntentData> OnNewStateIntent;
+    public event Action OnFingerTouchInputDown;
+    public event Action OnFingerTouchInputUp;
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
 
     private Dictionary<Guid, StateIntentData> _idToIntent;
+
+    private int _cameraFingerId;
+    private int _defaultFingerIdValue = -1;
 
     private void Awake()
     {
@@ -21,16 +28,47 @@ public class InputHandler : MonoBehaviour
         Instance = this;
 
         PopulateDictionaryWithIdAndIntent();
+
+        _cameraFingerId = _defaultFingerIdValue;
     }
 
     private void OnEnable()
     {
+        EnhancedTouchSupport.Enable();
+
         playerInput.actions["Move"].performed += OnIntentInputDetected;
+
+        Touch.Touch.onFingerDown += OnFingerDown;
+        Touch.Touch.onFingerUp += OnFingerUp;
     }
 
     private void OnDisable()
     {
-        playerInput.actions["Move"].performed -= OnIntentInputDetected;      
+        EnhancedTouchSupport.Disable();
+        playerInput.actions["Move"].performed -= OnIntentInputDetected; 
+
+        Touch.Touch.onFingerDown -= OnFingerDown;
+        Touch.Touch.onFingerUp -= OnFingerUp;
+    }
+
+    private void OnFingerDown(Finger targetFinger)
+    {
+        var targetFingerId = targetFinger.index;
+
+        if (EventSystem.current.IsPointerOverGameObject(targetFingerId)) return;
+
+        _cameraFingerId = targetFingerId;
+        OnFingerTouchInputDown?.Invoke();
+    }
+
+    private void OnFingerUp(Finger targetFinger)
+    {
+        var targetFingerId = targetFinger.index;
+
+        if (targetFingerId != _cameraFingerId) return;
+
+        _cameraFingerId = _defaultFingerIdValue;
+        OnFingerTouchInputUp?.Invoke();       
     }
 
     private void OnIntentInputDetected(InputAction.CallbackContext context)
