@@ -23,8 +23,6 @@ public class JumpState : BaseState
 
     public override void StateEnter(Action onStateCompleted)
     {
-        Debug.Log("Buhhhh");
-        
         _onStateCompleted = onStateCompleted;
 
         _movementData.JumpHeight = jumpHeight;
