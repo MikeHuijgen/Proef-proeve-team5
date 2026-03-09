@@ -95,7 +95,6 @@ public class InputHandler : MonoBehaviour
         return results.Count > 0;
     }
 
-
     private void OnIntentInputDetected(InputAction.CallbackContext context)
     {
         var stateIntentData = GetIntentDataByInputId(context);

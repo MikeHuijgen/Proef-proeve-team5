@@ -46,11 +46,8 @@ public class CamLook : MonoBehaviour
         _isUsingRightFingerId = false;      
     }
 
-    void Update()
-    {
-        RotateCamera();
-    }
-
+    void Update() => RotateCamera();
+    
     private void RotateCamera()
     {
         if (!_isAllowedToRotateCamera) return;
