@@ -40,6 +40,7 @@ public class CamLook : MonoBehaviour
         if (!_allowedToMoveCamera) return;
 
         var lookDelta = InputHandler.Instance.GetCameraValue();
+        //print(InputHandler.Instance.GetCameraValue());
 
         _xaw = Mathf.Clamp(_xaw, -45f, 45f);
 

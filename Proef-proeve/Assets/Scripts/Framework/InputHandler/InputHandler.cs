@@ -20,7 +20,10 @@ public class InputHandler : MonoBehaviour
     private Dictionary<Guid, StateIntentData> _idToIntent;
 
     private int _cameraFingerId;
+
+    private List<int> _uiFingerIds;
     private int _defaultFingerIdValue = -1;
+    private Vector2 _cameraLookValue;
 
     private void Awake()
     {
@@ -30,6 +33,7 @@ public class InputHandler : MonoBehaviour
         PopulateDictionaryWithIdAndIntent();
 
         _cameraFingerId = _defaultFingerIdValue;
+        _uiFingerIds = new List<int>();
     }
 
     private void OnEnable()
@@ -55,7 +59,11 @@ public class InputHandler : MonoBehaviour
     {
         var targetFingerId = targetFinger.index;
 
-        if (EventSystem.current.IsPointerOverGameObject(targetFingerId)) return;
+        if (IsTouchOverUI(targetFinger))
+        {
+            _uiFingerIds.Add(targetFingerId);
+            return;
+        }
 
         _cameraFingerId = targetFingerId;
         OnFingerTouchInputDown?.Invoke();
@@ -65,11 +73,26 @@ public class InputHandler : MonoBehaviour
     {
         var targetFingerId = targetFinger.index;
 
-        if (targetFingerId != _cameraFingerId) return;
+        if (targetFingerId != _cameraFingerId) 
+        {
+            _uiFingerIds.Remove(targetFingerId);
+            return;
+        }
 
         _cameraFingerId = _defaultFingerIdValue;
         OnFingerTouchInputUp?.Invoke();       
     }
+
+    private bool IsTouchOverUI(Finger finger)
+    {
+        var eventData = new PointerEventData(EventSystem.current) {position = finger.screenPosition};
+
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        return results.Count > 0;
+    }
+
 
     private void OnIntentInputDetected(InputAction.CallbackContext context)
     {
@@ -99,7 +122,14 @@ public class InputHandler : MonoBehaviour
         return intentData;
     }
 
+    private void RemoveUiFingerId(int fingerId)
+    {
+        if (!_uiFingerIds.Contains(fingerId)) return;
+
+
+    }
+
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
 
-    public Vector2 GetCameraValue() => playerInput.actions["look"].ReadValue<Vector2>();
+    public Vector2 GetCameraValue() => _cameraLookValue;
 }
