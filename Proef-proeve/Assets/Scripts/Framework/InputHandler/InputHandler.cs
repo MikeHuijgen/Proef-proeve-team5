@@ -15,10 +15,14 @@ public class InputHandler : MonoBehaviour
     public event Action OnCameraFingerTouchDown;
     public event Action OnCameraFingerTouchUp;
 
+    public event Action OnNewJumpInput;
+
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
 
     private Dictionary<Guid, StateIntentData> _idToIntent;
+    
+    private InputAction.CallbackContext _lastMoveContext;
 
     private int _cameraFingerId;
 
@@ -44,12 +48,16 @@ public class InputHandler : MonoBehaviour
 
         Touch.onFingerDown += OnFingerDown;
         Touch.onFingerUp += OnFingerUp;
+
+        playerInput.actions["Jump"].performed += OnJumpInputDetected;
+        playerInput.actions["Move"].started += StoreMoveActionCallback;
     }
 
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
-        playerInput.actions["Move"].performed -= OnIntentInputDetected; 
+        playerInput.actions["Jump"].performed -= OnJumpInputDetected;
+        playerInput.actions["Move"].performed -= StoreMoveActionCallback; 
 
         Touch.onFingerDown -= OnFingerDown;
         Touch.onFingerUp -= OnFingerUp;
@@ -95,12 +103,25 @@ public class InputHandler : MonoBehaviour
         return results.Count > 0;
     }
 
+    private void Update()
+    {
+        var moveAction = playerInput.actions["Move"];
+
+        if (moveAction.IsPressed())
+        {
+            OnIntentInputDetected(_lastMoveContext);
+        }
+    }
+
     private void OnIntentInputDetected(InputAction.CallbackContext context)
     {
         var stateIntentData = GetIntentDataByInputId(context);
         if(stateIntentData == null) return;
         OnNewStateIntent?.Invoke( stateIntentData);
     }
+    
+    private void OnJumpInputDetected(InputAction.CallbackContext context) => OnNewJumpInput?.Invoke();
+    
 
     private void PopulateDictionaryWithIdAndIntent()
     {
@@ -109,7 +130,7 @@ public class InputHandler : MonoBehaviour
         foreach (var inputToIntent in inputToIntents)
         {
             var reference = inputToIntent.inputActionReference;
-            if (reference == null && reference.action == null) continue;
+            if (reference == null || reference.action == null) continue;
 
             _idToIntent[reference.action.id] = inputToIntent.intentSO;
         }
@@ -135,6 +156,12 @@ public class InputHandler : MonoBehaviour
         if (!_uiFingerIds.Contains(fingerId)) return;
 
         _uiFingerIds.Remove(fingerId);
+    }
+
+    private void StoreMoveActionCallback(InputAction.CallbackContext context)
+    {
+        if ( _lastMoveContext.action != null) return;
+        _lastMoveContext = context;
     }
 
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
