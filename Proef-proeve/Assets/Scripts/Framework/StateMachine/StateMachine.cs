@@ -48,7 +48,6 @@ public class StateMachine : MonoBehaviour
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
         
-        _playerStunRequestHandler.OnStunRequest += OnNewStateIntent;
     }
 
     public void OnNewStateIntent(StateIntentData intentData)
@@ -79,7 +78,11 @@ public class StateMachine : MonoBehaviour
         OnNewActiveState?.Invoke(newState.ToString());
     }
 
-    private void Update() => _currentActiveState?.StateUpdate(Time.deltaTime);
+    private void Update()
+    {
+        _currentActiveState?.StateUpdate(Time.deltaTime);
+        print(_currentActiveState);
+    }
 
 
     private BaseState GetDesiredDefaultState()
