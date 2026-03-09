@@ -1,10 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Launch : MonoBehaviour
 {
+    public static event Action<StateIntentData> OnLaunch;
+    public static event Action OnLanded;
     PlayerGravity _gravity;
     MovementData _movementData;
     [SerializeField] private Transform _startLocation;
+
+    [SerializeField] private StateIntentData travelIntent;
     [SerializeField] private Transform _endLocation;
     [SerializeField]private Transform _nextPlanet;
 
@@ -15,7 +20,6 @@ public class Launch : MonoBehaviour
     [SerializeField] private float _travelTime;
 
     private CapsuleCollider _capsuleCollider;
-    [SerializeField] private MeshRenderer _renderer;
 
     private float _elapsedTime;
     private float _planetDistance;
@@ -52,25 +56,23 @@ public class Launch : MonoBehaviour
         // reset the journey if it is done.
         if (_journey >= 1f)
         {
-            Debug.Log("land");
             _gravity.enabled = true;
             _isTravel = false;
-            _renderer.enabled = true;
         }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         // if player makes collision with somting, travel is true than.
-        if (collision.gameObject == _player)
+        if (collision.CompareTag("Player"))
         {
+            OnLaunch?.Invoke(travelIntent);
             _gravity.ResetGravity();
             _gravity.enabled = false;
             _movementData.WorldMiddle = _nextPlanet;
             _travelTime = Time.time;
             _isTravel =  true;
             _player.transform.SetParent(transform);
-            _renderer.enabled = false;
             _capsuleCollider.enabled = false;
         }
     }

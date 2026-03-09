@@ -36,6 +36,7 @@ public class StateMachine : MonoBehaviour
     private void OnEnable()
     {
         InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
+        Launch.OnLaunch += OnNewStateIntent;
 
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump += OnNewStateIntent;
@@ -44,6 +45,8 @@ public class StateMachine : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+        Launch.OnLaunch -= OnNewStateIntent;
+
 
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
@@ -52,6 +55,7 @@ public class StateMachine : MonoBehaviour
 
     public void OnNewStateIntent(StateIntentData intentData)
     {
+        print(intentData);
         var state = GetStateByIntentData(intentData);
         if (!CheckAllConditions(state)) return;
 
@@ -78,11 +82,7 @@ public class StateMachine : MonoBehaviour
         OnNewActiveState?.Invoke(newState.ToString());
     }
 
-    private void Update()
-    {
-        _currentActiveState?.StateUpdate(Time.deltaTime);
-        print(_currentActiveState);
-    }
+    private void Update() => _currentActiveState?.StateUpdate(Time.deltaTime);
 
 
     private BaseState GetDesiredDefaultState()

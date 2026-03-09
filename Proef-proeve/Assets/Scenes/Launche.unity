@@ -1469,6 +1469,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: intentDataToStates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: intentDataToStates.Array.data[1].state
+      value: 
+      objectReference: {fileID: 1755311860}
+    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: intentDataToStates.Array.data[1].stateIntentData
+      value: 
+      objectReference: {fileID: 11400000, guid: 05f758dff4d426e4e971f4b095938e51, type: 2}
     - target: {fileID: 2045129079971598728, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.85916
@@ -1520,8 +1532,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1755311860}
   m_SourcePrefab: {fileID: 100100000, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+--- !u!1 &1755311859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+  m_PrefabInstance: {fileID: 1755311858}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1755311860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755311859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767063c28970f64e96563d33c026daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TravelState
+  stateInterruptPermission: []
+  allowedInAirborne: 1
 --- !u!1 &1770500551
 GameObject:
   m_ObjectHideFlags: 0
