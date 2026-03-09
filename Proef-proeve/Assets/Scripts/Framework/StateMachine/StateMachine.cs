@@ -1,55 +1,33 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class StateMachine : MonoBehaviour
 {
     public static event Action<string> OnNewActiveState;
 
     [SerializeField] private IntentToState[] intentDataToStates;
-    
-    [SerializeField] private BaseState defaultGroundedState;
-
-    [SerializeField] private BaseState defaultAirborneState;
-
+    [SerializeField] private BaseState defaultState;
     private BaseState _currentActiveState;
     private Dictionary<StateIntentData, BaseState> _intentDataToStateDictionary;
     private PlayerStunRequestHandler _playerStunRequestHandler;
-
-    private GroundCheck _groundCheck;
-    private JumpBuffer _jumpBuffer;
-
-    private void Start()
-    {
-        _groundCheck = GetComponent<GroundCheck>();
-        _jumpBuffer = GetComponent<JumpBuffer>();
-    }
 
     private void Awake()
     {
         _playerStunRequestHandler = GetComponent<PlayerStunRequestHandler>();
         PopulateIntentDataToStateDictionary();
-        SwitchState(defaultGroundedState);
+        SwitchState(defaultState);
     }
 
     private void OnEnable()
     {
         InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
-
-        if (_jumpBuffer != null)
-            _jumpBuffer.OnConfirmJump += OnNewStateIntent;
-
         _playerStunRequestHandler.OnStunRequest += OnNewStateIntent;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
-
-        if (_jumpBuffer != null)
-            _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
-
         _playerStunRequestHandler.OnStunRequest -= OnNewStateIntent;
     }
 
@@ -63,15 +41,12 @@ public class StateMachine : MonoBehaviour
 
     private bool CheckAllConditions(BaseState newState)
     {
-        if (newState == null) return false;
-
-        if (!newState.AllowedInAirborne && !_groundCheck.IsGrounded) return false;
-        
-        if (newState == _currentActiveState || !CheckInterruptPermission(newState)) return false;
-
+        if (newState == null 
+        || newState == _currentActiveState 
+        || !CheckInterruptPermission(newState)) return false;
         return true;
     }
-    
+
     private void SwitchState(BaseState newState)
     {
         _currentActiveState?.StateExit();
@@ -83,27 +58,13 @@ public class StateMachine : MonoBehaviour
 
     private void Update() => _currentActiveState?.StateUpdate(Time.deltaTime);
 
-
-    private BaseState GetDesiredDefaultState()
-    {
-        if (_groundCheck == null) return defaultGroundedState;
-
-        if (_groundCheck.IsGrounded)
-            return defaultGroundedState;
-
-        return defaultAirborneState;
-    }
-
     private BaseState GetStateByIntentData(StateIntentData intentData)
     {
         _intentDataToStateDictionary.TryGetValue(intentData, out var state);
         return state;
     }
 
-    private void OnStateCompleted()
-    {
-        SwitchState(GetDesiredDefaultState());
-    }
+    private void OnStateCompleted() => SwitchState(defaultState);
 
     private void PopulateIntentDataToStateDictionary()
     {

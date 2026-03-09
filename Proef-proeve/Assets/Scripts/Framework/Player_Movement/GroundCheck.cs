@@ -5,6 +5,7 @@ public class GroundCheck : MovementComponent
     [SerializeField] private float _groundCheckDistance = 0.05f;
     [SerializeField] private LayerMask _groundLayer;
 
+    [Tooltip("How much smaller than CharacterController.radius the ground check sphere should be.")]
     [SerializeField] private float _radiusInset = 0.01f;
 
     public bool IsGrounded { get; private set; }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovementComponent : MonoBehaviour
 {
-    public MovementData MovementData;
+    public MovementData MovementData { get; private set; }
 
     private void Awake()
     {
