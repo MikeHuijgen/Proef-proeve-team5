@@ -47,13 +47,8 @@ public class StateMachine : MonoBehaviour
 
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
+        
         _playerStunRequestHandler.OnStunRequest += OnNewStateIntent;
-    }
-
-    void OnDisable()
-    {
-        InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
-        _playerStunRequestHandler.OnStunRequest -= OnNewStateIntent;
     }
 
     public void OnNewStateIntent(StateIntentData intentData)
