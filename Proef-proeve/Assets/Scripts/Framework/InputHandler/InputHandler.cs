@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Touch = UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
     public event Action<StateIntentData> OnNewStateIntent;
-    public event Action OnFingerTouchInputDown;
-    public event Action OnFingerTouchInputUp;
+    public event Action<int> OnCameraFingerTouchMove;
+    public event Action<int> OnCameraFingerTouchDown;
+    public event Action OnCameraFingerTouchUp;
 
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
@@ -42,8 +44,17 @@ public class InputHandler : MonoBehaviour
 
         playerInput.actions["Move"].performed += OnIntentInputDetected;
 
-        Touch.Touch.onFingerDown += OnFingerDown;
-        Touch.Touch.onFingerUp += OnFingerUp;
+        Touch.onFingerDown += OnFingerDown;
+        Touch.onFingerMove += OnFingerMove;
+        Touch.onFingerUp += OnFingerUp;
+    }
+
+    private void OnFingerMove(Finger targetFinger)
+    {
+        var targetFingerId = targetFinger.index;     
+        if (targetFingerId != _cameraFingerId) return;
+
+        OnCameraFingerTouchMove?.Invoke(targetFingerId);   
     }
 
     private void OnDisable()
@@ -51,8 +62,9 @@ public class InputHandler : MonoBehaviour
         EnhancedTouchSupport.Disable();
         playerInput.actions["Move"].performed -= OnIntentInputDetected; 
 
-        Touch.Touch.onFingerDown -= OnFingerDown;
-        Touch.Touch.onFingerUp -= OnFingerUp;
+        Touch.onFingerDown -= OnFingerDown;
+        Touch.onFingerMove -= OnFingerMove;
+        Touch.onFingerUp -= OnFingerUp;
     }
 
     private void OnFingerDown(Finger targetFinger)
@@ -61,12 +73,14 @@ public class InputHandler : MonoBehaviour
 
         if (IsTouchOverUI(targetFinger))
         {
-            _uiFingerIds.Add(targetFingerId);
+            AddUiFingerId(targetFingerId);
             return;
         }
 
+        if (_uiFingerIds.Contains(targetFingerId)) return;
+
         _cameraFingerId = targetFingerId;
-        OnFingerTouchInputDown?.Invoke();
+        OnCameraFingerTouchDown?.Invoke(targetFingerId);
     }
 
     private void OnFingerUp(Finger targetFinger)
@@ -75,12 +89,12 @@ public class InputHandler : MonoBehaviour
 
         if (targetFingerId != _cameraFingerId) 
         {
-            _uiFingerIds.Remove(targetFingerId);
+            RemoveUiFingerId(targetFingerId);
             return;
         }
 
-        _cameraFingerId = _defaultFingerIdValue;
-        OnFingerTouchInputUp?.Invoke();       
+        _cameraFingerId = _defaultFingerIdValue;   
+        OnCameraFingerTouchUp?.Invoke();   
     }
 
     private bool IsTouchOverUI(Finger finger)
@@ -122,14 +136,32 @@ public class InputHandler : MonoBehaviour
         return intentData;
     }
 
+    private void AddUiFingerId(int fingerId)
+    {
+        if (_uiFingerIds.Contains(fingerId)) return;
+
+        _uiFingerIds.Add(fingerId);
+    }
+
     private void RemoveUiFingerId(int fingerId)
     {
         if (!_uiFingerIds.Contains(fingerId)) return;
 
-
+        _uiFingerIds.Remove(fingerId);
     }
 
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
 
-    public Vector2 GetCameraValue() => _cameraLookValue;
+    public Vector2 GetCameraValue()
+    {
+        if (_cameraFingerId == _defaultFingerIdValue)
+            return Vector2.zero;
+
+        var touch = Touch.activeTouches.FirstOrDefault(f => f.finger.index == _cameraFingerId);
+
+        if (touch.finger == null)
+            return Vector2.zero;
+
+        return touch.delta;
+    }
 }

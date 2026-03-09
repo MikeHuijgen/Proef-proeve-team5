@@ -7,9 +7,13 @@ public class CamLook : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 0.15f;
 
-    private bool _allowedToMoveCamera;
     private float _yaw;
     private float _xaw;
+
+    private int _currentCameraFingerId;
+    private bool _isAllowedToRotateCamera;
+    private bool _isUsingRightFingerId;
+    private Vector2 _lookDelta;
 
     private void Start()
     {
@@ -19,34 +23,46 @@ public class CamLook : MonoBehaviour
 
     private void OnEnable()
     {
-        InputHandler.Instance.OnFingerTouchInputDown += OnFingerTouchInputDown;
-        InputHandler.Instance.OnFingerTouchInputUp += OnFingerTouchInputUp;
+        InputHandler.Instance.OnCameraFingerTouchDown += OnCameraFingerTouchDown;
+        InputHandler.Instance.OnCameraFingerTouchUp += OnCameraFingerTouchUp;
     }
 
     private void OnDisable()
     {
-        InputHandler.Instance.OnFingerTouchInputDown -= OnFingerTouchInputDown;
-        InputHandler.Instance.OnFingerTouchInputUp -= OnFingerTouchInputUp;        
+        InputHandler.Instance.OnCameraFingerTouchDown -= OnCameraFingerTouchDown;
+        InputHandler.Instance.OnCameraFingerTouchUp -= OnCameraFingerTouchUp;
     }
 
-    private void OnFingerTouchInputDown() => _allowedToMoveCamera = true;
-    private void OnFingerTouchInputUp() => _allowedToMoveCamera = false;
+    private void OnCameraFingerTouchDown(int fingerId)
+    {
+        _currentCameraFingerId = fingerId;
+        _isAllowedToRotateCamera = true;
+    }
 
-    private void Update() => RotateCamera();
-    
+    private void OnCameraFingerTouchUp()
+    {
+        _currentCameraFingerId = 0;
+        _isAllowedToRotateCamera = false;  
+        _isUsingRightFingerId = false;      
+    }
+
+    void Update()
+    {
+        RotateCamera();
+    }
 
     private void RotateCamera()
     {
-        if (!_allowedToMoveCamera) return;
+        if (!_isAllowedToRotateCamera) return;
 
-        var lookDelta = InputHandler.Instance.GetCameraValue();
-        //print(InputHandler.Instance.GetCameraValue());
+        _lookDelta = InputHandler.Instance.GetCameraValue();
+        if (_lookDelta == Vector2.zero) return;
+
+        _yaw += _lookDelta.x * -sensitivity;
+        _xaw += _lookDelta.y * sensitivity;
 
         _xaw = Mathf.Clamp(_xaw, -45f, 45f);
 
-        _yaw += lookDelta.x * -sensitivity;
-        _xaw += lookDelta.y * sensitivity;
-
-        transform.localRotation = Quaternion.Euler(_xaw, _yaw, 0f);       
+        transform.localRotation = Quaternion.Euler(_xaw, _yaw, 0f);
     }
 }
