@@ -9,10 +9,14 @@ public class InputHandler : MonoBehaviour
     public static InputHandler Instance;
     public event Action<StateIntentData> OnNewStateIntent;
 
+    public event Action OnNewJumpInput;
+
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private InputToIntent[] inputToIntents;
 
     private Dictionary<Guid, StateIntentData> _idToIntent;
+    
+    private InputAction.CallbackContext _lastMoveContext;
 
     private void Awake()
     {
@@ -25,11 +29,25 @@ public class InputHandler : MonoBehaviour
     private void OnEnable()
     {
         playerInput.actions["Move"].performed += OnIntentInputDetected;
+        playerInput.actions["Jump"].performed += OnJumpInputDetected;
+        playerInput.actions["Move"].started += StoreMoveActionCallback;
     }
 
     private void OnDisable()
     {
         playerInput.actions["Move"].performed -= OnIntentInputDetected;      
+        playerInput.actions["Jump"].performed -= OnJumpInputDetected;  
+        playerInput.actions["Move"].started -= StoreMoveActionCallback;
+    }
+
+    private void Update()
+    {
+        var moveAction = playerInput.actions["Move"];
+
+        if (moveAction.IsPressed())
+        {
+            OnIntentInputDetected(_lastMoveContext);
+        }
     }
 
     private void OnIntentInputDetected(InputAction.CallbackContext context)
@@ -38,6 +56,9 @@ public class InputHandler : MonoBehaviour
         if(stateIntentData == null) return;
         OnNewStateIntent?.Invoke( stateIntentData);
     }
+    
+    private void OnJumpInputDetected(InputAction.CallbackContext context) => OnNewJumpInput?.Invoke();
+    
 
     private void PopulateDictionaryWithIdAndIntent()
     {
@@ -46,7 +67,7 @@ public class InputHandler : MonoBehaviour
         foreach (var inputToIntent in inputToIntents)
         {
             var reference = inputToIntent.inputActionReference;
-            if (reference == null && reference.action == null) continue;
+            if (reference == null || reference.action == null) continue;
 
             _idToIntent[reference.action.id] = inputToIntent.intentSO;
         }
@@ -58,6 +79,12 @@ public class InputHandler : MonoBehaviour
         if (action == null) return null;
         _idToIntent.TryGetValue(action.id, out var intentData);
         return intentData;
+    }
+
+    private void StoreMoveActionCallback(InputAction.CallbackContext context)
+    {
+        if ( _lastMoveContext.action != null) return;
+        _lastMoveContext = context;
     }
 
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
