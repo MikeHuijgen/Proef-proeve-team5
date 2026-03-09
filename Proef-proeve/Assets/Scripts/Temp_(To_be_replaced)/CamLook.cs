@@ -9,10 +9,7 @@ public class CamLook : MonoBehaviour
 
     private float _yaw;
     private float _xaw;
-
-    private int _currentCameraFingerId;
     private bool _isAllowedToRotateCamera;
-    private bool _isUsingRightFingerId;
     private Vector2 _lookDelta;
 
     private void Start()
@@ -33,18 +30,8 @@ public class CamLook : MonoBehaviour
         InputHandler.Instance.OnCameraFingerTouchUp -= OnCameraFingerTouchUp;
     }
 
-    private void OnCameraFingerTouchDown(int fingerId)
-    {
-        _currentCameraFingerId = fingerId;
-        _isAllowedToRotateCamera = true;
-    }
-
-    private void OnCameraFingerTouchUp()
-    {
-        _currentCameraFingerId = 0;
-        _isAllowedToRotateCamera = false;  
-        _isUsingRightFingerId = false;      
-    }
+    private void OnCameraFingerTouchDown() => _isAllowedToRotateCamera = true;
+    private void OnCameraFingerTouchUp() => _isAllowedToRotateCamera = false;       
 
     void Update() => RotateCamera();
     

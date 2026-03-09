@@ -12,7 +12,7 @@ public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
     public event Action<StateIntentData> OnNewStateIntent;
-    public event Action<int> OnCameraFingerTouchDown;
+    public event Action OnCameraFingerTouchDown;
     public event Action OnCameraFingerTouchUp;
 
     [SerializeField] private PlayerInput playerInput;
@@ -68,7 +68,7 @@ public class InputHandler : MonoBehaviour
         if (_uiFingerIds.Contains(targetFingerId)) return;
 
         _cameraFingerId = targetFingerId;
-        OnCameraFingerTouchDown?.Invoke(targetFingerId);
+        OnCameraFingerTouchDown?.Invoke();
     }
 
     private void OnFingerUp(Finger targetFinger)
