@@ -12,7 +12,6 @@ public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
     public event Action<StateIntentData> OnNewStateIntent;
-    public event Action<int> OnCameraFingerTouchMove;
     public event Action<int> OnCameraFingerTouchDown;
     public event Action OnCameraFingerTouchUp;
 
@@ -25,7 +24,6 @@ public class InputHandler : MonoBehaviour
 
     private List<int> _uiFingerIds;
     private int _defaultFingerIdValue = -1;
-    private Vector2 _cameraLookValue;
 
     private void Awake()
     {
@@ -45,16 +43,7 @@ public class InputHandler : MonoBehaviour
         playerInput.actions["Move"].performed += OnIntentInputDetected;
 
         Touch.onFingerDown += OnFingerDown;
-        Touch.onFingerMove += OnFingerMove;
         Touch.onFingerUp += OnFingerUp;
-    }
-
-    private void OnFingerMove(Finger targetFinger)
-    {
-        var targetFingerId = targetFinger.index;     
-        if (targetFingerId != _cameraFingerId) return;
-
-        OnCameraFingerTouchMove?.Invoke(targetFingerId);   
     }
 
     private void OnDisable()
@@ -63,7 +52,6 @@ public class InputHandler : MonoBehaviour
         playerInput.actions["Move"].performed -= OnIntentInputDetected; 
 
         Touch.onFingerDown -= OnFingerDown;
-        Touch.onFingerMove -= OnFingerMove;
         Touch.onFingerUp -= OnFingerUp;
     }
 
