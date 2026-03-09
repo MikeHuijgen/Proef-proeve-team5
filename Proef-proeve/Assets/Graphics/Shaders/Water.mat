@@ -155,7 +155,7 @@ Material:
     - _Surface: 0
     - _Wateralpha: 0.79
     - _Waterdepth: 20.61
-    - _Watersize: 6.7
+    - _Watersize: 40.26
     - _Waterspeed: 0.64
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
