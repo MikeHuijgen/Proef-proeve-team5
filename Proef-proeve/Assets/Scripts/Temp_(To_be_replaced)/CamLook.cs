@@ -1,41 +1,51 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using System;
 
 public class CamLook : MonoBehaviour
 {
     [SerializeField] private float sensitivity = 0.15f;
 
-    private float yaw;
-    private float xaw;
+    private bool _allowedToMoveCamera;
+    private float _yaw;
+    private float _xaw;
 
     private void Start()
     {
-        yaw = transform.eulerAngles.y;
-        xaw = transform.eulerAngles.x;
+        _yaw = transform.eulerAngles.y;
+        _xaw = transform.eulerAngles.x;
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        Vector2 lookDelta = InputHandler.Instance.GetCameraValue();
+        InputHandler.Instance.OnFingerTouchInputDown += OnFingerTouchInputDown;
+        InputHandler.Instance.OnFingerTouchInputUp += OnFingerTouchInputUp;
+    }
 
-        // MOBILE: ignore input over UI
-        if (Touchscreen.current != null) // Only on mobile
-        {
-            foreach (var touch in Touchscreen.current.touches)
-            {
-                if (touch.press.isPressed && EventSystem.current.IsPointerOverGameObject((int)touch.touchId.ReadValue()))
-                {
-                    return; // ignore this frame if over UI
-                }
-            }
-        }
+    private void OnDisable()
+    {
+        InputHandler.Instance.OnFingerTouchInputDown -= OnFingerTouchInputDown;
+        InputHandler.Instance.OnFingerTouchInputUp -= OnFingerTouchInputUp;        
+    }
 
-        xaw = Mathf.Clamp(xaw, -45f, 45f);
+    private void OnFingerTouchInputDown() => _allowedToMoveCamera = true;
+    private void OnFingerTouchInputUp() => _allowedToMoveCamera = false;
 
-        yaw += lookDelta.x * -sensitivity;
-        xaw += lookDelta.y * sensitivity;
+    private void Update() => RotateCamera();
+    
 
-        transform.localRotation = Quaternion.Euler(xaw, yaw, 0f);
+    private void RotateCamera()
+    {
+        if (!_allowedToMoveCamera) return;
+
+        var lookDelta = InputHandler.Instance.GetCameraValue();
+
+        _xaw = Mathf.Clamp(_xaw, -45f, 45f);
+
+        _yaw += lookDelta.x * -sensitivity;
+        _xaw += lookDelta.y * sensitivity;
+
+        transform.localRotation = Quaternion.Euler(_xaw, _yaw, 0f);       
     }
 }
