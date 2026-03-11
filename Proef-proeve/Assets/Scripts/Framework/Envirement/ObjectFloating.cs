@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ObjectFloating : MonoBehaviour
 {
-    [SerializeField] private Transform floatingObject;
     [SerializeField] private float floatDuration = 2f;
     [SerializeField] private float floatHeight = 2f;
 
@@ -16,9 +15,9 @@ public class ObjectFloating : MonoBehaviour
 
     private void Start()
     {
-        _startPosition = floatingObject.position;
+        _startPosition = this.transform.position;
 
-        _targetPosition = _startPosition + floatingObject.up * floatHeight;
+        _targetPosition = _startPosition + this.transform.up * floatHeight;
 
         _floatCountdownTimer = new CountdownTimer(floatDuration);
         _floatCountdownTimer.StartTimer();
@@ -32,8 +31,8 @@ public class ObjectFloating : MonoBehaviour
 
         Vector3 target = _movingUp ? _targetPosition : _startPosition;
 
-        floatingObject.position = Vector3.MoveTowards(
-            floatingObject.position,
+        this.transform.position = Vector3.MoveTowards(
+            this.transform.position,
             target,
             (floatHeight / floatDuration) * deltaTime
         );
