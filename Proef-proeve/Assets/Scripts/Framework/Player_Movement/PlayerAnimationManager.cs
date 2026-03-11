@@ -56,7 +56,7 @@ public class PlayerAnimationManager : MonoBehaviour
 
         animator.SetBool(Grounded, groundCheck.IsGrounded);
 
-        float speed01 = Mathf.InverseLerp(0, 5, movementData.MoveSpeed);
+        float speed01 = Mathf.InverseLerp(0, maxSpeed, movementData.MoveSpeed);
         animator.SetFloat(Speed, speed01, speedDampTime, dt);
 
         if (movementData != null && movementData.JumpRequested)
