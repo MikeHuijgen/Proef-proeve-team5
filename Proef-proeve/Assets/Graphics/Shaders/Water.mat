@@ -115,7 +115,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Alpha_Strenght: 0.44
+    - _Alpha_Strenght: 0.32
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Blend: 0
@@ -137,7 +137,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Lijn_strenght: 4
+    - _Lijn_strenght: 3.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -155,7 +155,7 @@ Material:
     - _Surface: 0
     - _Wateralpha: 0.79
     - _Waterdepth: 20.61
-    - _Watersize: 6.7
+    - _Watersize: 18.73
     - _Waterspeed: 0.64
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
