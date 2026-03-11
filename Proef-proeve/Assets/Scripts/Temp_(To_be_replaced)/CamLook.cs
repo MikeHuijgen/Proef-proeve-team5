@@ -1,41 +1,52 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using System;
 
 public class CamLook : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float sensitivity = 0.15f;
 
-    private InputAction lookAction;
+    private float _yaw;
+    private float _xaw;
+    private bool _isAllowedToRotateCamera;
+    private Vector2 _lookDelta;
 
-    private float yaw;
-
-    private void Awake()
+    private void Start()
     {
-        lookAction = playerInput.actions["Look"];
+        _yaw = transform.eulerAngles.y;
+        _xaw = transform.eulerAngles.x;
     }
 
     private void OnEnable()
     {
-        lookAction.Enable();
+        InputHandler.Instance.OnCameraFingerTouchDown += OnCameraFingerTouchDown;
+        InputHandler.Instance.OnCameraFingerTouchUp += OnCameraFingerTouchUp;
     }
 
     private void OnDisable()
     {
-        lookAction.Disable();
+        InputHandler.Instance.OnCameraFingerTouchDown -= OnCameraFingerTouchDown;
+        InputHandler.Instance.OnCameraFingerTouchUp -= OnCameraFingerTouchUp;
     }
 
-    private void Start()
+    private void OnCameraFingerTouchDown() => _isAllowedToRotateCamera = true;
+    private void OnCameraFingerTouchUp() => _isAllowedToRotateCamera = false;       
+
+    void Update() => RotateCamera();
+    
+    private void RotateCamera()
     {
-        yaw = transform.eulerAngles.y;
-    }
+        if (!_isAllowedToRotateCamera) return;
 
-    private void Update()
-    {
-        Vector2 lookDelta = lookAction.ReadValue<Vector2>();
+        _lookDelta = InputHandler.Instance.GetCameraValue();
+        if (_lookDelta == Vector2.zero) return;
 
-        yaw += lookDelta.x * sensitivity;
+        _yaw += _lookDelta.x * sensitivity;
+        _xaw += _lookDelta.y * -sensitivity;
 
-        transform.localRotation = Quaternion.Euler(0f, yaw, 0f);
+        _xaw = Mathf.Clamp(_xaw, -45f, 45f);
+
+        transform.localRotation = Quaternion.Euler(_xaw, _yaw, 0f);
     }
 }
