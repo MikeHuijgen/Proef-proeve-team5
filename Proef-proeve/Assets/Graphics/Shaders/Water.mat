@@ -34,7 +34,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: afaec735fad68624d92b547dd0aa9b51, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 243e5bcb390e29c47bd778c0d1e3926a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -94,6 +94,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_78868ad480ad4a3682d756cbe32cc680_Texture_1_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -111,6 +115,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _Alpha_Strenght: 0.32
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _Blend: 0
@@ -128,16 +133,20 @@ Material:
     - _Foam_amount: 79.5
     - _Foam_cut_of: 71.2
     - _Foamscale: 58.9
-    - _Foamspeed: 0.9
+    - _Foamspeed: 0.14
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _Lijn_strenght: 3.2
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RefrectionStrenght: 5.29
+    - _Refrectionscale: 0.33
+    - _Refrectionspeed: 0.01
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -145,18 +154,22 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _Wateralpha: 0.79
-    - _Waterdepth: 1.24
+    - _Waterdepth: 20.61
+    - _Watersize: 18.73
+    - _Waterspeed: 0.64
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Blauw_water: {r: 0.31764707, g: 0.46274513, b: 0.58431375, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Deep_color: {r: 1, g: 1, b: 1, a: 1}
+    - _Deep_color: {r: 0.07063166, g: 0.1231007, b: 0.14588535, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Foamcolor: {r: 0.7735849, g: 0.6349235, b: 0.6349235, a: 1}
+    - _Foamcolor: {r: 0.5918476, g: 0.6603774, b: 0.65915644, a: 0.32941177}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Surface_color: {r: 0, g: 0, b: 0, a: 1}
+    - _Surface_color: {r: 0.16826946, g: 0.2917707, b: 0.30498737, a: 0.6}
     - _Watercolor: {r: 0.6017586, g: 0.8415094, b: 0.6967235, a: 1}
+    - _Witte_lijn_water: {r: 0.7349163, g: 0.8747332, b: 0.8792453, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
