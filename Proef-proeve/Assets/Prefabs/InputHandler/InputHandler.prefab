@@ -49,6 +49,8 @@ MonoBehaviour:
   inputToIntents:
   - inputActionReference: {fileID: 2688571583986329813, guid: df4ccd9729ec49d4c86739704a31df28, type: 3}
     intentSO: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
+  - inputActionReference: {fileID: 170430751023472769, guid: df4ccd9729ec49d4c86739704a31df28, type: 3}
+    intentSO: {fileID: 11400000, guid: deb6b54be8255a144bd32fd80d84d599, type: 2}
 --- !u!114 &2879779345968406736
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.009
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
       propertyPath: m_LocalPosition.z
@@ -48,9 +48,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7824753648676844136, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.7107496
+      objectReference: {fileID: 0}
+    - target: {fileID: -7824753648676844136, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1157905
+      objectReference: {fileID: 0}
+    - target: {fileID: -7780899342098753337, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.004394591
+      objectReference: {fileID: 0}
+    - target: {fileID: -7780899342098753337, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07100023
+      objectReference: {fileID: 0}
+    - target: {fileID: -3274006528333456403, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.004394591
+      objectReference: {fileID: 0}
+    - target: {fileID: -3274006528333456403, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.07100023
+      objectReference: {fileID: 0}
+    - target: {fileID: -1241573624986276186, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0545052
+      objectReference: {fileID: 0}
+    - target: {fileID: -1241573624986276186, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.086861745
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
       propertyPath: m_Name
       value: P_thruster_large
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857944161866907047, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.353
+      objectReference: {fileID: 0}
+    - target: {fileID: 8857944161866907047, guid: d2ad0b6f48a11a14595b040605182e16, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.071
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

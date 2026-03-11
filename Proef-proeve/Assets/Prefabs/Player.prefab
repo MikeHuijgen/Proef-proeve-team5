@@ -20,9 +20,11 @@ GameObject:
   - component: {fileID: 7204130346509982864}
   - component: {fileID: 5903242138868841946}
   - component: {fileID: 7214643774927954438}
+  - component: {fileID: 8027941876096310850}
+  - component: {fileID: 4421175433468310676}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,6 +123,8 @@ MonoBehaviour:
   intentDataToStates:
   - stateIntentData: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
     state: {fileID: 6283007613142843258}
+  - stateIntentData: {fileID: 11400000, guid: 2e577ecb86c63a542bbb4982ce646e40, type: 2}
+    state: {fileID: 8027941876096310850}
   defaultGroundedState: {fileID: 1998417375813292732}
   defaultAirborneState: {fileID: 5903242138868841946}
 --- !u!114 &6686397260266543184
@@ -169,6 +173,7 @@ MonoBehaviour:
   stateInterruptPermission:
   - {fileID: 6283007613142843258}
   - {fileID: 7204130346509982864}
+  - {fileID: 8027941876096310850}
   allowedInAirborne: 1
 --- !u!114 &6283007613142843258
 MonoBehaviour:
@@ -185,6 +190,7 @@ MonoBehaviour:
   stateInterruptPermission:
   - {fileID: 7204130346509982864}
   - {fileID: 5903242138868841946}
+  - {fileID: 8027941876096310850}
   allowedInAirborne: 1
   groundMoveSpeed: 5
   groundRotationSpeed: 10
@@ -236,6 +242,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpBuffer
   jumpIntentData: {fileID: 11400000, guid: deb6b54be8255a144bd32fd80d84d599, type: 2}
+--- !u!114 &8027941876096310850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a658283ec17d24da1bc790b92b1ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StunState
+  stateInterruptPermission: []
+  allowedInAirborne: 1
+  stunDuration: 0
+--- !u!114 &4421175433468310676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdf5536d59c7014f95349fd3ac009e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStunRequestHandler
+  coolDownTime: 2
+  stunIntentReference: {fileID: 0}
 --- !u!1 &4671102514696879609
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199f8a5112869194ba861d1c325f233b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CamLook
-  playerInput: {fileID: 0}
   sensitivity: 0.15
 --- !u!1 &5262000284404276110
 GameObject:
