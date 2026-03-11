@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class StunState : BaseState
 {
+    public static event Action OnStunStateExit;
     [SerializeField] private float stunDuration;
 
     private CountdownTimer _stunCountdownTimer;
@@ -16,7 +17,7 @@ public class StunState : BaseState
 
     public override void StateExit()
     {
-        
+        OnStunStateExit?.Invoke();
     }
 
     public override void StateUpdate(float deltaTime)

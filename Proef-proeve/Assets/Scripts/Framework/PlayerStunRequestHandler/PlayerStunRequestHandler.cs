@@ -4,17 +4,19 @@ using UnityEngine.Events;
 
 public class PlayerStunRequestHandler : MonoBehaviour
 {
-    [SerializeField] private float coolDownTime;
+    [SerializeField] private float coolDownTime = 2f;
     [SerializeField] private StateIntentData stunIntentReference;
     private CountdownTimer _countDownTimer;
     public event Action<StateIntentData> OnStunRequest;
 
-    private void Awake() => _countDownTimer = new CountdownTimer(coolDownTime);
+    private void Start() => _countDownTimer = new CountdownTimer(coolDownTime);
+
+    private void OnEnable() => StunState.OnStunStateExit += StartCountdown;
+    private void OnDisable() => StunState.OnStunStateExit -= StartCountdown;
 
     public void RequestStun()
     {
         if(_countDownTimer.IsTimerActive) return;
-        _countDownTimer.StartTimer();
         OnStunRequest?.Invoke(stunIntentReference);
     }
 
@@ -28,4 +30,6 @@ public class PlayerStunRequestHandler : MonoBehaviour
 
         _countDownTimer.StopTimer();
     }
+
+    private void StartCountdown() => _countDownTimer.StartTimer();
 }
