@@ -53,6 +53,6 @@ public class MoveState : BaseState
 
     public override void StateExit()
     {
-        
+        _movementData.MoveSpeed = 0;
     }
 }
