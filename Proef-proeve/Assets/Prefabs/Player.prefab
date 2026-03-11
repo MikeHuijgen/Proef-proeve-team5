@@ -301,7 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199f8a5112869194ba861d1c325f233b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CamLook
-  playerInput: {fileID: 0}
   sensitivity: 0.15
 --- !u!1 &5262000284404276110
 GameObject:
