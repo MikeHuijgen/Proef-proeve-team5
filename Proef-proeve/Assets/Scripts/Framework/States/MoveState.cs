@@ -30,24 +30,26 @@ public class MoveState : BaseState
     public override void StateUpdate(float deltaTime)
     {
         Vector2 input = InputHandler.Instance != null ? InputHandler.Instance.GetMoveValue() : Vector2.zero;
-        if (input.magnitude < inputDeadzone) input = Vector2.zero;
+        float inputStrength = input.magnitude;
+        if (inputStrength < inputDeadzone) input = Vector2.zero;
 
         _movementData.MoveInput = input;
 
         bool grounded = _groundCheck != null && _groundCheck.IsGrounded;
 
+
         if (grounded)
         {
-            _movementData.MoveSpeed = groundMoveSpeed;
+            _movementData.MoveSpeed = groundMoveSpeed * inputStrength;
             _movementData.RotationSpeed = groundRotationSpeed;
         }
         else
         {
-            _movementData.MoveSpeed = airMoveSpeed;
+            _movementData.MoveSpeed = airMoveSpeed * inputStrength;
             _movementData.RotationSpeed = airRotationSpeed;
         }
         
-        if (input.magnitude <= 0.05) _onStateCompleted?.Invoke();
+        if (inputStrength <= 0.05) _onStateCompleted?.Invoke();
         
     }
 
