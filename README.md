@@ -25,4 +25,7 @@ We document everything we do for this project inside the Github [Wiki](https://g
 - Joshua [Artist](https://github.com/drunkjoshua)
   -
 - Raphael [Artist](https://github.com/Raphbama)
-  -
+  - Shaders [Instructions] (https://github.com/MikeHuijgen/Proef-proeve-team5/wiki/Blackhole-Shader)(https://github.com/MikeHuijgen/Proef-proeve-team5/wiki/Watershader)
+  - Particle system
+  - Prop art
+    
