@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MovementData : MonoBehaviour
@@ -25,7 +26,11 @@ public class MovementData : MonoBehaviour
     {
         CharacterController = GetComponent<CharacterController>();
         _lastPosition = transform.position;
+        Launch.OnPlanetChange += OnPlanetChange;
     }
+
+    private void OnPlanetChange(Transform newPlanet) => WorldMiddle = newPlanet;
+
 
     void Update()
     {
