@@ -63,6 +63,9 @@ public class Launch : MonoBehaviour
         {
             _isTravel = false;
             _playerTransform.parent = null;
+            var normal = (transform.position - endLocation.position).normalized;
+            transform.position += normal * 2f;
+
             OnLanded?.Invoke();
         }
     }
