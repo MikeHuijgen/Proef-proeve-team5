@@ -36,6 +36,7 @@ public class StateMachine : MonoBehaviour
     private void OnEnable()
     {
         InputHandler.Instance.OnNewStateIntent += OnNewStateIntent;
+        Launch.OnLaunch += OnNewStateIntent;
 
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump += OnNewStateIntent;
@@ -46,6 +47,8 @@ public class StateMachine : MonoBehaviour
     private void OnDisable()
     {
         InputHandler.Instance.OnNewStateIntent -= OnNewStateIntent;
+        Launch.OnLaunch -= OnNewStateIntent;
+
 
         if (_jumpBuffer != null)
             _jumpBuffer.OnConfirmJump -= OnNewStateIntent;
