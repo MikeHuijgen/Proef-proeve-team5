@@ -1319,10 +1319,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1787674128659240318, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 2045129079971598728, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.85916
@@ -1368,58 +1364,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: Camera
-      value: 
-      objectReference: {fileID: 1796783376}
-    - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: WorldMiddle
       value: 
       objectReference: {fileID: 1025520838}
-    - target: {fileID: 5635147780246082521, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635147780246082521, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5903242138868841946, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stateInterruptPermission.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5903242138868841946, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1869257323}
-    - target: {fileID: 7204130346509982864, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stateInterruptPermission.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7204130346509982864, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1869257323}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
---- !u!4 &1796783376 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1787674128659240318, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 1755311858}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1869257323 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1170894832872869405, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 1755311858}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2767063c28970f64e96563d33c026daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TravelState
 --- !u!1 &1901362468
 GameObject:
   m_ObjectHideFlags: 0
