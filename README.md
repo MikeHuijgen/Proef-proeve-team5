@@ -12,6 +12,7 @@ We document everything we do for this project inside the Github [Wiki](https://g
   - Stun state, player stun request handler and stun component [Documentation]()
   - Timer, duration timer and countdown timer [Documentation](https://github.com/MikeHuijgen/Proef-proeve-team5/wiki/Base-timer,-duration-timer,-countdown-timer)
   - Oxygen station and oxygen component [Documentation](https://github.com/MikeHuijgen/Proef-proeve-team5/wiki/Oxygen-component-and-oxygen-station)
+  - Multi touch system/filter
 - Gerben [Developer](https://github.com/Gerben-Prins)
   -
 - Keith [Developer](https://github.com/keithko)
