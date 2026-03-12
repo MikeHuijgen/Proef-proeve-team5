@@ -11031,7 +11031,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1023453072}
+    - targetCorrespondingSourceObject: {fileID: 1867810699923940079, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 988154755517434232}
   m_SourcePrefab: {fileID: 100100000, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+--- !u!1 &988154755517434230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1867810699923940079, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+  m_PrefabInstance: {fileID: 988154755517434229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &988154755517434231 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5805918707091820657, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+  m_PrefabInstance: {fileID: 988154755517434229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &988154755517434232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988154755517434230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd6c428d2bb8dd48a2b6030f01d1110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenUI
+  skinnedMeshRenderer: {fileID: 988154755517434231}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
