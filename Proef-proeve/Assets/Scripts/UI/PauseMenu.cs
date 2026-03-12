@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
     {
         _pauzeMenu.SetActive(true);
         _playerInput.SetActive(false);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         isPaused = true;
     }
 
@@ -37,7 +37,7 @@ public class PauseMenu : MonoBehaviour
     {
         _pauzeMenu.SetActive(false);
         _playerInput.SetActive(true);
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         isPaused = false;
     }
 }
