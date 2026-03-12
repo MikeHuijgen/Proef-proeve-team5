@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class OxygenComponent : MonoBehaviour
 {
     [SerializeField] private float maxOxygen = 100f;
+    [SerializeField] private float oxygenDecreaseAmount = 1f;
     public UnityEvent OnNoOxygenLeft = new UnityEvent();
     public static event Action<float> OnUpdatedOxygen;
 
@@ -29,12 +30,13 @@ public class OxygenComponent : MonoBehaviour
 
     private void DecreaseOxygen()
     {
-        if (_isRefillingOxygen) return;
+        if (_isRefillingOxygen || _currentOxygen <= 0) return;
         _oxygenIsMaxed = false;
-        _currentOxygen -= Time.deltaTime;
+        _currentOxygen -= oxygenDecreaseAmount * Time.deltaTime;
         OnUpdatedOxygen?.Invoke(_currentOxygen);
 
         if (_currentOxygen > 0) return;
+        _currentOxygen = 0f;
         OnNoOxygenLeft?.Invoke();
     }
 
