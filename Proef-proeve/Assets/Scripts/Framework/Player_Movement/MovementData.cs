@@ -31,6 +31,7 @@ public class MovementData : MonoBehaviour
 
     private void OnPlanetChange(Transform newPlanet) => WorldMiddle = newPlanet;
 
+
     void Update()
     {
         Vector3 currentPosition = transform.position;

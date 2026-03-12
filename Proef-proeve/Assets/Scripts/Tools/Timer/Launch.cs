@@ -65,8 +65,7 @@ public class Launch : MonoBehaviour
             _playerTransform.parent = null;
             Vector3 normal = (transform.position - nextPlanet.position).normalized;
             transform.position = endLocation.position + normal * 2f;
-
-
+            
             OnLanded?.Invoke();
         }
     }

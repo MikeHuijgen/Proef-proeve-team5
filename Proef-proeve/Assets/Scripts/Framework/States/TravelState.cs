@@ -6,11 +6,13 @@ public class TravelState : BaseState
     [SerializeField] private GameObject meshRenderer;
     private PlayerGravity _playerGravity;
     private MovementMotor _movementMotor;
+    private MovementData _movementData;
 
     private void Start()
     {
         _playerGravity = GetComponent<PlayerGravity>();
         _movementMotor = GetComponent<MovementMotor>();
+        _movementData = GetComponent<MovementData>();
         Launch.OnLanded += OnLand;
     }
 
@@ -20,6 +22,7 @@ public class TravelState : BaseState
         _playerGravity.ResetGravity();
         _playerGravity.enabled = false;
         _movementMotor.enabled = false;
+        _movementData.enabled = false;
         meshRenderer.SetActive(false);
     }
 
@@ -27,6 +30,7 @@ public class TravelState : BaseState
     {
         _playerGravity.enabled = true;
         _movementMotor.enabled = true;  
+        _movementData.enabled = true;
         meshRenderer.SetActive(true);      
     }
 
