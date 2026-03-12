@@ -20,7 +20,7 @@ public class TravelState : BaseState
         _playerGravity.ResetGravity();
         _playerGravity.enabled = false;
         _movementMotor.enabled = false;
-        //meshRenderer.SetActive(false);
+        meshRenderer.SetActive(false);
     }
 
     public override void StateExit()
