@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject PauzeMenu;
+    [SerializeField] GameObject _pauzeMenu;
+    [SerializeField] GameObject _playerInput;
 
     bool isPaused;
 
     private void Start()
     {
-        PauzeMenu.SetActive(false);
+        _pauzeMenu.SetActive(false);
     }
 
     public void IsPaused()
@@ -26,14 +27,16 @@ public class PauseMenu : MonoBehaviour
 
     private void PauseGame()
     {
-        PauzeMenu.SetActive(true);
+        _pauzeMenu.SetActive(true);
+        _playerInput.SetActive(false);
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     private void ResumeGame()
     {
-        PauzeMenu.SetActive(false);
+        _pauzeMenu.SetActive(false);
+        _playerInput.SetActive(true);
         Time.timeScale = 1f;
         isPaused = false;
     }
