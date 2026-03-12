@@ -5358,62 +5358,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 181705766575978666, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 363741643047077869, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[1].state
-      value: 
-      objectReference: {fileID: 1886063412}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[2].state
-      value: 
-      objectReference: {fileID: 1886063416}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[3].state
-      value: 
-      objectReference: {fileID: 1886063410}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[4].state
-      value: 
-      objectReference: {fileID: 1886063425}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[1].stateIntentData
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e577ecb86c63a542bbb4982ce646e40, type: 2}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[2].stateIntentData
-      value: 
-      objectReference: {fileID: 11400000, guid: deb6b54be8255a144bd32fd80d84d599, type: 2}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[3].stateIntentData
-      value: 
-      objectReference: {fileID: 11400000, guid: 6ef45afa529324243af85f4b94697e3e, type: 2}
-    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: intentDataToStates.Array.data[4].stateIntentData
-      value: 
-      objectReference: {fileID: 11400000, guid: 05f758dff4d426e4e971f4b095938e51, type: 2}
-    - target: {fileID: 1998417375813292732, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stateInterruptPermission.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1998417375813292732, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[3]'
-      value: 
-      objectReference: {fileID: 1886063410}
-    - target: {fileID: 1998417375813292732, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[4]'
-      value: 
-      objectReference: {fileID: 1886063425}
     - target: {fileID: 2045129079971598728, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.36
@@ -5458,93 +5402,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3235117430997879256, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3665337412259379127, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4421175433468310676, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stunIntentReference
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e577ecb86c63a542bbb4982ce646e40, type: 2}
-    - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: MoveSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: CoyoteTime
-      value: 0.22
-      objectReference: {fileID: 0}
     - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: WorldMiddle
       value: 
       objectReference: {fileID: 1103348408}
-    - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: JumpBufferTime
-      value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 5903242138868841946, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stateInterruptPermission.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5903242138868841946, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[1]'
+    - target: {fileID: 6976599151012471370, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: defaultSpawnPoint
       value: 
-      objectReference: {fileID: 1886063425}
-    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: airMoveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: groundMoveSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stateInterruptPermission.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[3]'
-      value: 
-      objectReference: {fileID: 1886063410}
-    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: 'stateInterruptPermission.Array.data[4]'
-      value: 
-      objectReference: {fileID: 1886063425}
-    - target: {fileID: 7936973965818926862, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: knockbackDirection.z
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8027941876096310850, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: stunDuration
-      value: 2
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 806320815}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1886063393}
-    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1886063408}
-    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1886063409}
-    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1886063410}
-    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1886063425}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
 --- !u!1001 &910706120
 PrefabInstance:
@@ -10908,11 +10777,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1359756057657324353, guid: 5ccc15fb6dc5bf244b9231ad9a3129e6, type: 3}
   m_PrefabInstance: {fileID: 1672639390}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1710943620 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7850540860646691640, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 899978099}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1717854802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4916855934884616087, guid: 0c7c8ba4cb3d23444a9b8504f9323eee, type: 3}
@@ -12302,127 +12166,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 76130546}
   m_SourcePrefab: {fileID: 100100000, guid: 0c7c8ba4cb3d23444a9b8504f9323eee, type: 3}
---- !u!1 &1886063378 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 899978099}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1886063393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d4661f03b365b948976ceb09c569e4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeath
---- !u!4 &1886063407 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2045129079971598728, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 899978099}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1886063408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc5c60cf0f336145b3729fe02b0281b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CheckpointSystem
-  player: {fileID: 1886063407}
-  defaultSpawnPoint: {fileID: 806320815}
---- !u!54 &1886063409
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!114 &1886063410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef2aa6d8d87eee24ead2e620882f859a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DashState
-  stateInterruptPermission:
-  - {fileID: 1886063425}
-  allowedInAirborne: 1
-  dashSpeed: 12
-  dashDuration: 0.3
-  inputDeadzone: 0.1
-  allowAirDash: 1
-  dashForwardWhenNoInput: 1
-  dashRotationSpeed: 20
---- !u!114 &1886063412 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7936973965818926862, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 899978099}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34a658283ec17d24da1bc790b92b1ad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StunState
---- !u!114 &1886063416 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7204130346509982864, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-  m_PrefabInstance: {fileID: 899978099}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c30f84bd94875ab44a2e08e1ed62bbfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::JumpState
---- !u!114 &1886063425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886063378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2767063c28970f64e96563d33c026daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TravelState
-  stateInterruptPermission: []
-  allowedInAirborne: 1
-  meshRenderer: {fileID: 1710943620}
 --- !u!4 &1898410564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a9acba2b76e49f34cb68c786846761de, type: 3}

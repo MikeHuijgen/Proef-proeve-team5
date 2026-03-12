@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b14aac7d33e5ee459bd395cba600745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OxygenStation
-  refillAmountPerSecond: 3
+  refillAmountPerSecond: 5
 --- !u!135 &285894789234035354
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

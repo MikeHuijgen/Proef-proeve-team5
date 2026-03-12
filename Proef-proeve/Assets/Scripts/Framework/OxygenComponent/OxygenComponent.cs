@@ -12,6 +12,7 @@ public class OxygenComponent : MonoBehaviour
     private float _currentOxygen;
     private bool _isRefillingOxygen;
     private bool _oxygenIsMaxed;
+    private bool _allowedTheDecrease = true;
 
     private void Awake() => ResetOxygen();
     private void Update() => DecreaseOxygen();
@@ -51,4 +52,5 @@ public class OxygenComponent : MonoBehaviour
     }
 
     public void ExitOxygenStation() => _isRefillingOxygen = false;
+    public void IsAllowedToDecrease(bool value) => _allowedTheDecrease = value;
 }
