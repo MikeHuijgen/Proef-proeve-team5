@@ -16,6 +16,8 @@ public class OxygenComponent : MonoBehaviour
     private void Awake() => ResetOxygen();
     private void Update() => DecreaseOxygen();
 
+    void Start() => PlayerDeath.OnDie += ResetOxygen;
+
     public void RefillOxygenByAmount(float amount)
     {
         if (_oxygenIsMaxed) return;
