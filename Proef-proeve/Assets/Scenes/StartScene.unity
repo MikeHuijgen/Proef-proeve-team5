@@ -340,6 +340,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4508258179420753247, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2010826341}
+    - target: {fileID: 4508258179420753247, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitScene
+      objectReference: {fileID: 0}
     - target: {fileID: 7362133972003484810, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
       propertyPath: m_SizeDelta.y
       value: 60.001
@@ -391,6 +399,14 @@ PrefabInstance:
     - target: {fileID: 7833991364899074807, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920577445187042844, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2010826341}
+    - target: {fileID: 8920577445187042844, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: loadscene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -685,6 +701,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2010826341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1959524262477496539, guid: dcb95935c603dbf468e9b1d6352f1d25, type: 3}
+  m_PrefabInstance: {fileID: 683462933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5f5753abc1a5e47aaabe967d040112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
