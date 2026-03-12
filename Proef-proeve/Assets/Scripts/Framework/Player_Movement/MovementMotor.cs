@@ -17,6 +17,12 @@ public class MovementMotor : MovementComponent
         _characterController = GetComponent<CharacterController>();
         _animationManager = GetComponent<PlayerAnimationManager>();
     }
+    private void OnEnable()
+    {
+        Vector3 planetUp = (transform.position - MovementData.WorldMiddle.position).normalized;
+        transform.up = planetUp;
+    }
+
 
     private void Update()
     {
