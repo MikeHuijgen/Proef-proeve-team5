@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] private int _sceneNubmer;
     public void loadscene()
     {
+        print("test");
         SceneManager.LoadScene(_sceneNubmer);
     }
 
