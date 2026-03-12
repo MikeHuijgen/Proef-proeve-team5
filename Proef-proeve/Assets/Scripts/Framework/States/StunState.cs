@@ -28,7 +28,7 @@ public class StunState : BaseState
     {
         _playerAnimator.SetBool("IsStunned", false);
         _movementData.enabled = true;
-        CheckpointSystem.Instance.RespawnPlayer();
+        CheckpointSystem.Instance.RespawnPlayer();  
         OnStunStateExit?.Invoke();
     }
 
