@@ -55,7 +55,6 @@ public class StateMachine : MonoBehaviour
 
     public void OnNewStateIntent(StateIntentData intentData)
     {
-        print(intentData);
         var state = GetStateByIntentData(intentData);
         if (!CheckAllConditions(state)) return;
 
