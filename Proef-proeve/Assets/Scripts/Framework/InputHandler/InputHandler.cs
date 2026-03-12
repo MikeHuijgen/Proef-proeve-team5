@@ -45,6 +45,7 @@ public class InputHandler : MonoBehaviour
         EnhancedTouchSupport.Enable();
 
         playerInput.actions["Move"].performed += OnIntentInputDetected;
+        playerInput.actions["Dash"].performed += OnIntentInputDetected;
 
         Touch.onFingerDown += OnFingerDown;
         Touch.onFingerUp += OnFingerUp;
@@ -56,6 +57,7 @@ public class InputHandler : MonoBehaviour
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
+        playerInput.actions["Dash"].performed -= OnIntentInputDetected;
         playerInput.actions["Jump"].performed -= OnJumpInputDetected;
         playerInput.actions["Move"].performed -= StoreMoveActionCallback; 
 

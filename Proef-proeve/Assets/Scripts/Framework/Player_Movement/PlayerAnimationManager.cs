@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAnimationManager : MonoBehaviour
 {
     [Header("Refs (auto if null)")]
-    [SerializeField] private Animator animator;
+    public Animator animator;
     [SerializeField] private MovementData movementData;
     [SerializeField] private GroundCheck groundCheck;
 
