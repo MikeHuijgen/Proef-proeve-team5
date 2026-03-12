@@ -4,10 +4,15 @@ using TMPro;
 
 public class OxygenUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI oxygenValueText;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
 
     void OnEnable() => OxygenComponent.OnUpdatedOxygen += OnUpdatedOxygen;
     void OnDisable() => OxygenComponent.OnUpdatedOxygen -= OnUpdatedOxygen;
 
-    private void OnUpdatedOxygen(float newOxygenValue) => oxygenValueText.text = $"Oxygen: {newOxygenValue.ToString("F2")}";
+    private void OnUpdatedOxygen(float newOxygenValue)
+    {
+        var inverted = 100f - newOxygenValue;
+
+        skinnedMeshRenderer.SetBlendShapeWeight(0, inverted);
+    }
 }
