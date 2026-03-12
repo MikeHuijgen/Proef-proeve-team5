@@ -6,7 +6,12 @@ public class PlayerDeath : MonoBehaviour
     {
         if (other.CompareTag("Death"))
         {
-            CheckpointSystem.Instance.RespawnPlayer();
+            RespawnPlayer();
         }
+    }
+
+    public void RespawnPlayer()
+    {
+        CheckpointSystem.Instance.RespawnPlayer();        
     }
 }

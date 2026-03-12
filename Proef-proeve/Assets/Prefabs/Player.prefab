@@ -23,6 +23,12 @@ GameObject:
   - component: {fileID: 4605828722750339659}
   - component: {fileID: 7936973965818926862}
   - component: {fileID: 8936338172772113443}
+  - component: {fileID: 3766311465095646517}
+  - component: {fileID: 6976599151012471370}
+  - component: {fileID: 5274998449837448018}
+  - component: {fileID: 4011711000663990507}
+  - component: {fileID: 2106079764448367133}
+  - component: {fileID: 6889606601809204732}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -90,12 +96,12 @@ MonoBehaviour:
   Camera: {fileID: 8451481758887316532}
   PlayerBody: {fileID: 363741643047077869}
   MoveInput: {x: 0, y: 0}
-  MoveSpeed: 5
+  MoveSpeed: 7
   RotationSpeed: 10
   JumpRequested: 0
   JumpHeight: 3
-  CoyoteTime: 0.12
-  JumpBufferTime: 0.12
+  CoyoteTime: 0.22
+  JumpBufferTime: 0.22
 --- !u!114 &1403293901765048167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +130,14 @@ MonoBehaviour:
   intentDataToStates:
   - stateIntentData: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
     state: {fileID: 6283007613142843258}
+  - stateIntentData: {fileID: 11400000, guid: 2e577ecb86c63a542bbb4982ce646e40, type: 2}
+    state: {fileID: 7936973965818926862}
+  - stateIntentData: {fileID: 11400000, guid: deb6b54be8255a144bd32fd80d84d599, type: 2}
+    state: {fileID: 7204130346509982864}
+  - stateIntentData: {fileID: 11400000, guid: 6ef45afa529324243af85f4b94697e3e, type: 2}
+    state: {fileID: 4011711000663990507}
+  - stateIntentData: {fileID: 11400000, guid: 05f758dff4d426e4e971f4b095938e51, type: 2}
+    state: {fileID: 2106079764448367133}
   defaultGroundedState: {fileID: 1998417375813292732}
   defaultAirborneState: {fileID: 5903242138868841946}
 --- !u!114 &6686397260266543184
@@ -173,6 +187,8 @@ MonoBehaviour:
   - {fileID: 6283007613142843258}
   - {fileID: 7204130346509982864}
   - {fileID: 7936973965818926862}
+  - {fileID: 4011711000663990507}
+  - {fileID: 2106079764448367133}
   allowedInAirborne: 1
 --- !u!114 &6283007613142843258
 MonoBehaviour:
@@ -190,8 +206,10 @@ MonoBehaviour:
   - {fileID: 7204130346509982864}
   - {fileID: 5903242138868841946}
   - {fileID: 7936973965818926862}
+  - {fileID: 4011711000663990507}
+  - {fileID: 2106079764448367133}
   allowedInAirborne: 1
-  groundMoveSpeed: 5
+  groundMoveSpeed: 7
   groundRotationSpeed: 10
   airMoveSpeed: 5
   airRotationSpeed: 8
@@ -210,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JumpState
   stateInterruptPermission:
   - {fileID: 6283007613142843258}
+  - {fileID: 5903242138868841946}
   allowedInAirborne: 0
   jumpHeight: 2
   jumpStateDuration: 0.05
@@ -227,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FallingState
   stateInterruptPermission:
   - {fileID: 6283007613142843258}
+  - {fileID: 2106079764448367133}
   allowedInAirborne: 1
 --- !u!114 &7214643774927954438
 MonoBehaviour:
@@ -289,6 +309,124 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStunRequestHandler
   coolDownTime: 2
   stunIntentReference: {fileID: 11400000, guid: 2e577ecb86c63a542bbb4982ce646e40, type: 2}
+--- !u!114 &3766311465095646517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4661f03b365b948976ceb09c569e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeath
+--- !u!114 &6976599151012471370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc5c60cf0f336145b3729fe02b0281b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CheckpointSystem
+  player: {fileID: 2045129079971598728}
+  defaultSpawnPoint: {fileID: 0}
+--- !u!54 &5274998449837448018
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &4011711000663990507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2aa6d8d87eee24ead2e620882f859a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DashState
+  stateInterruptPermission:
+  - {fileID: 2106079764448367133}
+  allowedInAirborne: 1
+  dashSpeed: 12
+  dashDuration: 0.3
+  inputDeadzone: 0.1
+  allowAirDash: 1
+  dashForwardWhenNoInput: 1
+  dashRotationSpeed: 20
+--- !u!114 &2106079764448367133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2767063c28970f64e96563d33c026daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TravelState
+  stateInterruptPermission: []
+  allowedInAirborne: 1
+  meshRenderer: {fileID: 7850540860646691640}
+--- !u!114 &6889606601809204732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2308646803138135478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2167e0477d712c41908033aa66098e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenComponent
+  maxOxygen: 100
+  oxygenDecreaseAmount: 2
+  OnNoOxygenLeft:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3766311465095646517}
+        m_TargetAssemblyTypeName: PlayerDeath, Assembly-CSharp
+        m_MethodName: RespawnPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4671102514696879609
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +589,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -499,7 +637,7 @@ Transform:
   m_GameObject: {fileID: 7850540860646691640}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -655,6 +793,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StateDebugUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2646052633940443088, guid: b0a380315a6e6244d98ae55647d50fcc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -740,7 +882,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b1e1f2d47ccad04b8d3665f9f8af002, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8515489788271091559}
+    - targetCorrespondingSourceObject: {fileID: -2231289618334022802, guid: 4b1e1f2d47ccad04b8d3665f9f8af002, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6010260415742931223}
   m_SourcePrefab: {fileID: 100100000, guid: 4b1e1f2d47ccad04b8d3665f9f8af002, type: 3}
+--- !u!1 &1867810699923940079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2231289618334022802, guid: 4b1e1f2d47ccad04b8d3665f9f8af002, type: 3}
+  m_PrefabInstance: {fileID: 8710830321447002497}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6010260415742931223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867810699923940079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd6c428d2bb8dd48a2b6030f01d1110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OxygenUI
+  skinnedMeshRenderer: {fileID: 5805918707091820657}
+--- !u!137 &5805918707091820657 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -6309030383077019152, guid: 4b1e1f2d47ccad04b8d3665f9f8af002, type: 3}
+  m_PrefabInstance: {fileID: 8710830321447002497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8368391620688731344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4b1e1f2d47ccad04b8d3665f9f8af002, type: 3}
