@@ -1,13 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance;
     public event Action<StateIntentData> OnNewStateIntent;
+    public event Action OnCameraFingerTouchDown;
+    public event Action OnCameraFingerTouchUp;
 
     public event Action OnNewJumpInput;
 
@@ -18,26 +24,83 @@ public class InputHandler : MonoBehaviour
     
     private InputAction.CallbackContext _lastMoveContext;
 
+    private int _cameraFingerId;
+
+    private List<int> _uiFingerIds;
+    private int _defaultFingerIdValue = -1;
+
     private void Awake()
     {
         if (Instance != null) Destroy(gameObject);
         Instance = this;
 
         PopulateDictionaryWithIdAndIntent();
+
+        _cameraFingerId = _defaultFingerIdValue;
+        _uiFingerIds = new List<int>();
     }
 
     private void OnEnable()
     {
+        EnhancedTouchSupport.Enable();
+
         playerInput.actions["Move"].performed += OnIntentInputDetected;
+
+        Touch.onFingerDown += OnFingerDown;
+        Touch.onFingerUp += OnFingerUp;
+
         playerInput.actions["Jump"].performed += OnJumpInputDetected;
         playerInput.actions["Move"].started += StoreMoveActionCallback;
     }
 
     private void OnDisable()
     {
-        playerInput.actions["Move"].performed -= OnIntentInputDetected;      
-        playerInput.actions["Jump"].performed -= OnJumpInputDetected;  
-        playerInput.actions["Move"].started -= StoreMoveActionCallback;
+        EnhancedTouchSupport.Disable();
+        playerInput.actions["Jump"].performed -= OnJumpInputDetected;
+        playerInput.actions["Move"].performed -= StoreMoveActionCallback; 
+
+        Touch.onFingerDown -= OnFingerDown;
+        Touch.onFingerUp -= OnFingerUp;
+    }
+
+    private void OnFingerDown(Finger targetFinger)
+    {
+        var targetFingerId = targetFinger.index;
+
+        if (IsTouchOverUI(targetFinger))
+        {
+            AddUiFingerId(targetFingerId);
+            return;
+        }
+
+        if (_uiFingerIds.Contains(targetFingerId)) return;
+
+        _cameraFingerId = targetFingerId;
+        OnCameraFingerTouchDown?.Invoke();
+    }
+
+    private void OnFingerUp(Finger targetFinger)
+    {
+        var targetFingerId = targetFinger.index;
+
+        if (targetFingerId != _cameraFingerId) 
+        {
+            RemoveUiFingerId(targetFingerId);
+            return;
+        }
+
+        _cameraFingerId = _defaultFingerIdValue;   
+        OnCameraFingerTouchUp?.Invoke();   
+    }
+
+    private bool IsTouchOverUI(Finger finger)
+    {
+        var eventData = new PointerEventData(EventSystem.current) {position = finger.screenPosition};
+
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        return results.Count > 0;
     }
 
     private void Update()
@@ -81,6 +144,20 @@ public class InputHandler : MonoBehaviour
         return intentData;
     }
 
+    private void AddUiFingerId(int fingerId)
+    {
+        if (_uiFingerIds.Contains(fingerId)) return;
+
+        _uiFingerIds.Add(fingerId);
+    }
+
+    private void RemoveUiFingerId(int fingerId)
+    {
+        if (!_uiFingerIds.Contains(fingerId)) return;
+
+        _uiFingerIds.Remove(fingerId);
+    }
+
     private void StoreMoveActionCallback(InputAction.CallbackContext context)
     {
         if ( _lastMoveContext.action != null) return;
@@ -88,4 +165,17 @@ public class InputHandler : MonoBehaviour
     }
 
     public Vector2 GetMoveValue() => playerInput.actions["Move"].ReadValue<Vector2>();
+
+    public Vector2 GetCameraValue()
+    {
+        if (_cameraFingerId == _defaultFingerIdValue)
+            return Vector2.zero;
+
+        var touch = Touch.activeTouches.FirstOrDefault(f => f.finger.index == _cameraFingerId);
+
+        if (touch.finger == null)
+            return Vector2.zero;
+
+        return touch.delta;
+    }
 }
