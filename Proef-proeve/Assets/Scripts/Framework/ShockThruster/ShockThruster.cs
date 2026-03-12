@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShockThruster : MonoBehaviour
 {
     [SerializeField] private float shockInterval;
-    [SerializeField] private BoxCollider shockBoxCollider;
+    [SerializeField] private SphereCollider shockSphereCollider;
     [SerializeField] private GameObject particle;
     private CountdownTimer _shockTimer;
 
@@ -31,8 +31,8 @@ public class ShockThruster : MonoBehaviour
         _shockTimer.StartTimer();
     }
 
-    private void EnableBoxCollider() => shockBoxCollider.enabled = true;
-    private void DisableBoxCollider() => shockBoxCollider.enabled = false;
+    private void EnableBoxCollider() => shockSphereCollider.enabled = true;
+    private void DisableBoxCollider() => shockSphereCollider.enabled = false;
     private void EnableParticle() => particle.SetActive(true);
     private void DisableParticle() => particle.SetActive(false);
 }
