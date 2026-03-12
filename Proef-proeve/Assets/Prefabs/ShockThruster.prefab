@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1359756057657324353}
   - component: {fileID: 3895715033699986041}
   - component: {fileID: 3277450717038126426}
+  - component: {fileID: -6643390154355373696}
   m_Layer: 0
   m_Name: ShockThruster
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShockThruster
   shockInterval: 4
   shockBoxCollider: {fileID: 3277450717038126426}
+  particle: {fileID: 1098073482023787154}
 --- !u!65 &3277450717038126426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -69,6 +71,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 4, z: 5}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &-6643390154355373696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994997496640682316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 678bb9a8d7023034ba376cfb7dc7f8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StunComponent
 --- !u!1001 &8764523854651795106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +140,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09caeb05e4a1a1b46878baacc4af0328, type: 3}
+--- !u!1 &1098073482023787154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8546983278307507248, guid: 09caeb05e4a1a1b46878baacc4af0328, type: 3}
+  m_PrefabInstance: {fileID: 8764523854651795106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8604205685347561978 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1065558132051973976, guid: 09caeb05e4a1a1b46878baacc4af0328, type: 3}
