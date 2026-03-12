@@ -10,6 +10,11 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(_sceneNubmer);
     }
 
+    public void HomeScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void QuitScene()
     {
         Application.Quit();
