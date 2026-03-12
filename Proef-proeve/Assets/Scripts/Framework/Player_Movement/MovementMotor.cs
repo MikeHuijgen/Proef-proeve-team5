@@ -8,13 +8,14 @@ public class MovementMotor : MovementComponent
     private PlayerGravity _gravity;
     private GroundCheck _groundCheck;
     private CharacterController _characterController;
+    private PlayerAnimationManager _animationManager;
 
     private void Awake()
     {
         _gravity = GetComponent<PlayerGravity>();
         _groundCheck = GetComponent<GroundCheck>();
-
         _characterController = GetComponent<CharacterController>();
+        _animationManager = GetComponent<PlayerAnimationManager>();
     }
     private void OnEnable()
     {
@@ -37,11 +38,14 @@ public class MovementMotor : MovementComponent
             Vector3 n = _groundCheck.GroundHit.normal;
             if (n.sqrMagnitude > 0.0001f) movePlaneNormal = n.normalized;
         }
-        
+
         if (MovementData.JumpRequested)
         {
             float jumpSpeed = Mathf.Sqrt(2f * _gravity.GravityStrength * MovementData.JumpHeight);
             _gravity.Jump(jumpSpeed);
+
+            _animationManager?.NotifyJumpStarted();
+
             MovementData.ConsumeJumpRequest();
         }
 
