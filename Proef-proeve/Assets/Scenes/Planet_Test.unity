@@ -1839,6 +1839,8 @@ MonoBehaviour:
     intentSO: {fileID: 11400000, guid: 074b4bdb444f76f4188810bbdc510832, type: 2}
   - inputActionReference: {fileID: 170430751023472769, guid: df4ccd9729ec49d4c86739704a31df28, type: 3}
     intentSO: {fileID: 11400000, guid: deb6b54be8255a144bd32fd80d84d599, type: 2}
+  - inputActionReference: {fileID: 5775713811647087861, guid: df4ccd9729ec49d4c86739704a31df28, type: 3}
+    intentSO: {fileID: 11400000, guid: 6ef45afa529324243af85f4b94697e3e, type: 2}
 --- !u!4 &347936213
 Transform:
   m_ObjectHideFlags: 0
@@ -4900,6 +4902,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1992422713}
   m_LocalEulerAnglesHint: {x: 0, y: 16.528, z: 0}
+--- !u!1 &1023453044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+  m_PrefabInstance: {fileID: 988154755517434229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1023453058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023453044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2aa6d8d87eee24ead2e620882f859a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DashState
+  stateInterruptPermission: []
+  allowedInAirborne: 0
+  dashSpeed: 18
+  dashDuration: 0.2
+  inputDeadzone: 0.1
+  allowAirDash: 0
+  dashForwardWhenNoInput: 0
+  dashRotationSpeed: 20
+--- !u!114 &1023453072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023453044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34a658283ec17d24da1bc790b92b1ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StunState
+  stateInterruptPermission: []
+  allowedInAirborne: 1
+  stunDuration: 0
+--- !u!114 &1023453073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023453044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdf5536d59c7014f95349fd3ac009e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStunRequestHandler
+  coolDownTime: 2
+  stunIntentReference: {fileID: 11400000, guid: 2e577ecb86c63a542bbb4982ce646e40, type: 2}
 --- !u!1 &1027061987
 GameObject:
   m_ObjectHideFlags: 0
@@ -7430,7 +7486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenButton
-  m_ControlPath: <Keyboard>/k
+  m_ControlPath: <Keyboard>/shift
 --- !u!114 &1612051917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8939,7 +8995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.OnScreen.OnScreenStick
   m_MovementRange: 50
   m_DynamicOriginRange: 100
-  m_ControlPath: <AndroidJoystick>/stick
+  m_ControlPath: <Gamepad>/leftStick
   m_Behaviour: 0
   m_UseIsolatedInputActions: 0
   m_PointerDownAction:
@@ -10874,6 +10930,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: intentDataToStates.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: intentDataToStates.Array.data[1].state
+      value: 
+      objectReference: {fileID: 1023453058}
+    - target: {fileID: 1753344440013865394, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: intentDataToStates.Array.data[1].stateIntentData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ef45afa529324243af85f4b94697e3e, type: 2}
+    - target: {fileID: 1998417375813292732, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: stateInterruptPermission.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998417375813292732, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: 'stateInterruptPermission.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1023453058}
     - target: {fileID: 2045129079971598728, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10918,18 +10994,43 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 5153729528405461903, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
-      propertyPath: playerInput
-      value: 
-      objectReference: {fileID: 347936211}
     - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
       propertyPath: WorldMiddle
       value: 
       objectReference: {fileID: 1992422713}
+    - target: {fileID: 5496318443772500881, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: RotationSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: airRotationSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: groundRotationSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: stateInterruptPermission.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6283007613142843258, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      propertyPath: 'stateInterruptPermission.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1023453058}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1023453058}
+    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1023453073}
+    - targetCorrespondingSourceObject: {fileID: 2308646803138135478, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1023453072}
   m_SourcePrefab: {fileID: 100100000, guid: fab73e8f6fa66a64bad15bd564284d40, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
