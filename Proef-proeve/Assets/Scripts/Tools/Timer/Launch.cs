@@ -13,9 +13,6 @@ public class Launch : MonoBehaviour
     [SerializeField]private Transform nextPlanet;
     [SerializeField] private float travelDuration = 3f;
 
-    private Quaternion _targetRotation;
-    private bool _rotateToTarget;
-
 
     private Transform _playerTransform;
 
@@ -45,15 +42,29 @@ public class Launch : MonoBehaviour
         if (_travelTime >= travelDuration) return;
 
         _travelTime += Time.deltaTime;
-        var currentTravelTime = _travelTime / travelDuration;
+        var t = _travelTime / travelDuration;
 
-        transform.position = Vector3.Lerp(_startPosition, endLocation.position, currentTravelTime);
+        var newPos = Vector3.Lerp(_startPosition, endLocation.position, t);
 
-        if (Vector3.Distance(transform.position, endLocation.position) > _distanceThreshold) return;
+        var direction = (newPos - transform.position).normalized;
 
-        _isTravel = false;
-        _playerTransform.parent = null;
-        OnLanded?.Invoke();
+        if (direction != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(direction);
+
+            targetRot *= Quaternion.Euler(90, 0, 0);
+
+            transform.rotation = targetRot;
+        }
+
+        transform.position = newPos;
+
+        if (Vector3.Distance(transform.position, endLocation.position) <= _distanceThreshold)
+        {
+            _isTravel = false;
+            _playerTransform.parent = null;
+            OnLanded?.Invoke();
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -68,21 +79,4 @@ public class Launch : MonoBehaviour
         OnLaunch?.Invoke(travelIntent);
         OnPlanetChange?.Invoke(nextPlanet);
     }
-
-
-
-
-        // if player makes collision with somting, travel is true than.
-        // if (collision.CompareTag("Player"))
-        // {
-        //     OnLaunch?.Invoke(travelIntent);
-        //     _gravity.ResetGravity();
-        //     _gravity.enabled = false;
-        //     _movementData.WorldMiddle = _nextPlanet;
-        //     _travelTime = Time.time;
-        //     _isTravel =  true;
-        //     _player.transform.SetParent(transform);
-        //     _capsuleCollider.enabled = false;
-        //     _playerMovement.enabled = false;
-        // }
 }
