@@ -26,8 +26,9 @@ public class MovementData : MonoBehaviour
     {
         CharacterController = GetComponent<CharacterController>();
         _lastPosition = transform.position;
-        Launch.OnPlanetChange += OnPlanetChange;
     }
+    private void OnEnable() => Launch.OnPlanetChange += OnPlanetChange;
+    private void OnDisable() => Launch.OnPlanetChange -= OnPlanetChange;
 
     private void OnPlanetChange(Transform newPlanet) => WorldMiddle = newPlanet;
 

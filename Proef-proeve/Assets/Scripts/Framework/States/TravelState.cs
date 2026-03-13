@@ -11,14 +11,16 @@ public class TravelState : BaseState
     private PlayerGravity _playerGravity;
     private MovementMotor _movementMotor;
     private MovementData _movementData;
-    
+
+    private void OnEnable() => Launch.OnLanded += OnLand;
+    private void OnDisable() => Launch.OnLanded -= OnLand;
+
 
     private void Start()
     {
         _playerGravity = GetComponent<PlayerGravity>();
         _movementMotor = GetComponent<MovementMotor>();
         _movementData = GetComponent<MovementData>();
-        Launch.OnLanded += OnLand;
     }
 
     public override void StateEnter(Action onStateCompleted)

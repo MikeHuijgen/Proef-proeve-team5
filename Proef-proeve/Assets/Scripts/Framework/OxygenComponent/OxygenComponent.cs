@@ -17,7 +17,8 @@ public class OxygenComponent : MonoBehaviour
     private void Awake() => ResetOxygen();
     private void Update() => DecreaseOxygen();
 
-    void Start() => PlayerDeath.OnDie += ResetOxygen;
+    private void OnEnable() => PlayerDeath.OnDie += ResetOxygen;
+    private void OnDisable() => PlayerDeath.OnDie -= ResetOxygen;
 
     public void RefillOxygenByAmount(float amount)
     {
@@ -33,7 +34,7 @@ public class OxygenComponent : MonoBehaviour
 
     private void DecreaseOxygen()
     {
-        if (_isRefillingOxygen || _currentOxygen <= 0) return;
+        if (_isRefillingOxygen || _currentOxygen <= 0 || !_allowedTheDecrease) return;
         _oxygenIsMaxed = false;
         _currentOxygen -= oxygenDecreaseAmount * Time.deltaTime;
         OnUpdatedOxygen?.Invoke(_currentOxygen);
@@ -53,4 +54,6 @@ public class OxygenComponent : MonoBehaviour
 
     public void ExitOxygenStation() => _isRefillingOxygen = false;
     public void IsAllowedToDecrease(bool value) => _allowedTheDecrease = value;
+    private void OnGamePaused() => _allowedTheDecrease = false;
+    private void OnGameResume() => _allowedTheDecrease = true;
 }

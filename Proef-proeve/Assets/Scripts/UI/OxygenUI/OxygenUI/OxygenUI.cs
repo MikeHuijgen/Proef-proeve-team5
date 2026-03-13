@@ -11,6 +11,7 @@ public class OxygenUI : MonoBehaviour
 
     private void OnUpdatedOxygen(float newOxygenValue)
     {
+        print("test");
         var inverted = 100f - newOxygenValue;
 
         skinnedMeshRenderer.SetBlendShapeWeight(0, inverted);

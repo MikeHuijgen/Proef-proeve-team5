@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static event Action OnPauseStarted;
+    public static event Action OnPauseEnded;
     [SerializeField] GameObject _pauzeMenu;
     [SerializeField] GameObject _playerInput;
 
@@ -31,6 +34,7 @@ public class PauseMenu : MonoBehaviour
         _playerInput.SetActive(false);
         //Time.timeScale = 0f;
         isPaused = true;
+        OnPauseEnded?.Invoke();
     }
 
     private void ResumeGame()
@@ -39,5 +43,6 @@ public class PauseMenu : MonoBehaviour
         _playerInput.SetActive(true);
         //Time.timeScale = 1f;
         isPaused = false;
+        OnPauseEnded?.Invoke();
     }
 }
