@@ -17,8 +17,19 @@ public class OxygenComponent : MonoBehaviour
     private void Awake() => ResetOxygen();
     private void Update() => DecreaseOxygen();
 
-    private void OnEnable() => PlayerDeath.OnDie += ResetOxygen;
-    private void OnDisable() => PlayerDeath.OnDie -= ResetOxygen;
+    private void OnEnable()
+    {
+        PlayerDeath.OnDie += ResetOxygen;
+        PauseMenu.OnPauseStarted += OnGamePaused;
+        PauseMenu.OnPauseEnded += OnGameResume;
+    }
+    private void OnDisable()
+    {
+        PlayerDeath.OnDie -= ResetOxygen;
+        PauseMenu.OnPauseStarted -= OnGamePaused;
+        PauseMenu.OnPauseEnded -= OnGameResume;
+
+    }
 
     public void RefillOxygenByAmount(float amount)
     {

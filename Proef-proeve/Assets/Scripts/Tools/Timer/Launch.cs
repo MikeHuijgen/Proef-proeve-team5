@@ -79,7 +79,7 @@ public class Launch : MonoBehaviour
         _playerTransform = collision.gameObject.transform;
         _playerTransform.parent = transform;
 
-        OnLaunch?.Invoke(travelIntent);
         OnPlanetChange?.Invoke(nextPlanet);
+        OnLaunch?.Invoke(travelIntent);
     }
 }

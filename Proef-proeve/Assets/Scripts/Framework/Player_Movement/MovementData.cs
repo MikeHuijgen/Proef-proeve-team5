@@ -30,7 +30,11 @@ public class MovementData : MonoBehaviour
     private void OnEnable() => Launch.OnPlanetChange += OnPlanetChange;
     private void OnDisable() => Launch.OnPlanetChange -= OnPlanetChange;
 
-    private void OnPlanetChange(Transform newPlanet) => WorldMiddle = newPlanet;
+    private void OnPlanetChange(Transform newPlanet)
+    {
+        print(newPlanet);
+        WorldMiddle = newPlanet;
+    }
 
 
     void Update()
