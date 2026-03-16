@@ -26,4 +26,7 @@ We document everything we do for this project inside the Github [Wiki](https://g
 - Joshua [Artist](https://github.com/drunkjoshua)
   -
 - Raphael [Artist](https://github.com/Raphbama)
-  -
+  - Water shader [Documentatie](https://github.com/MikeHuijgen/Proef-proeve-team5/wiki/Watershader)
+  - Blackhole Shader[Documentatie](https://github.com/MikeHuijgen/Proef-proeve-team5/wiki/Blackhole)
+  - Confetti
+  - Checkpoint model
